@@ -1,0 +1,45 @@
+{
+	"name": "coruja",
+	"version": "0.1.0",
+	"private": true,
+	"description": "A family reading tracker and book inventory. Local-first, no account.",
+	"license": "AGPL-3.0-only",
+	"type": "module",
+	"engines": {
+		"node": ">=22.6"
+	},
+	"scripts": {
+		"dev": "vite dev",
+		"build": "vite build",
+		"preview": "vite preview",
+		"prepare": "git config core.hooksPath .githooks 2>/dev/null; svelte-kit sync || echo ''",
+		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
+		"test": "vitest --run",
+		"test:watch": "vitest",
+		"lint": "prettier --check .",
+		"format": "prettier --write .",
+		"marks": "node scripts/build-marks.mjs",
+		"lockup": "node scripts/build-lockup.mjs"
+	},
+	"dependencies": {
+		"dexie": "^4.2.0",
+		"zxing-wasm": "^2.2.0"
+	},
+	"devDependencies": {
+		"@sveltejs/adapter-static": "^3.0.10",
+		"@sveltejs/kit": "^2.63.0",
+		"@sveltejs/vite-plugin-svelte": "^7.1.2",
+		"@types/node": "^26.4.0",
+		"@vite-pwa/sveltekit": "^1.0.0",
+		"prettier": "^3.8.3",
+		"prettier-plugin-svelte": "^4.1.0",
+		"svelte": "^5.56.1",
+		"svelte-check": "^4.6.0",
+		"typescript": "^6.0.3",
+		"vite": "^8.0.16",
+		"vitest": "^4.1.8",
+		"workbox-precaching": "^7.4.1",
+		"workbox-routing": "^7.4.1",
+		"workbox-window": "^7.4.1"
+	}
+}

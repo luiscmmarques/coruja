@@ -1,0 +1,309 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>coruja — brand sheet</title>
+		<link rel="icon" href="../static/icon.svg" type="image/svg+xml" />
+		<style>
+			:root {
+				--accent: #4b3f9e;
+				--accent-soft: #eceafa;
+				--gold: #8a5a00;
+				--gold-fill: #f5c451;
+				--grow: #1f6f4a;
+				--alert: #a32020;
+				--bg: #fbfbf9;
+				--surface: #ffffff;
+				--ink: #1a1a1a;
+				--ink-soft: #56545e;
+				--line: #e3e2e8;
+			}
+			* {
+				box-sizing: border-box;
+			}
+			body {
+				margin: 0;
+				padding: 2rem 1.5rem 5rem;
+				background: var(--bg);
+				color: var(--ink);
+				font:
+					16px/1.55 system-ui,
+					-apple-system,
+					'Segoe UI',
+					sans-serif;
+			}
+			main {
+				max-width: 60rem;
+				margin: 0 auto;
+			}
+			h1 {
+				font-size: 1.5rem;
+				margin: 0 0 0.35rem;
+			}
+			h2 {
+				font-size: 1.0625rem;
+				margin: 0 0 0.15rem;
+			}
+			p {
+				color: var(--ink-soft);
+				margin: 0.35rem 0 0;
+				max-width: 46rem;
+			}
+			code {
+				font-size: 0.875em;
+				background: #f1f0f5;
+				padding: 0.1em 0.35em;
+				border-radius: 0.25rem;
+			}
+			.intro {
+				padding-bottom: 1.5rem;
+				border-bottom: 1px solid var(--line);
+				margin-bottom: 2rem;
+			}
+			section {
+				background: var(--surface);
+				border: 1px solid var(--line);
+				border-radius: 0.75rem;
+				padding: 1.25rem;
+				margin-bottom: 1.5rem;
+			}
+			.band {
+				padding: 1.1rem 1.25rem;
+				border-radius: 0.5rem;
+				display: flex;
+				align-items: center;
+				gap: 1.75rem;
+				flex-wrap: wrap;
+				margin-top: 0.75rem;
+			}
+			.band.light {
+				background: var(--bg);
+				border: 1px solid var(--line);
+			}
+			.band.dark {
+				background: var(--accent);
+			}
+			img {
+				display: block;
+			}
+			figure {
+				margin: 0;
+			}
+			figcaption {
+				font-size: 0.6875rem;
+				color: var(--ink-soft);
+				margin-top: 0.4rem;
+				font-variant-numeric: tabular-nums;
+			}
+			.dark figcaption {
+				color: #d8d4f0;
+			}
+			.tile {
+				display: grid;
+				place-items: center;
+				background: var(--bg);
+			}
+			.tile.round {
+				border-radius: 50%;
+				overflow: hidden;
+			}
+			.tile.sq {
+				border-radius: 22%;
+				overflow: hidden;
+			}
+			.swatches {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				margin-top: 1rem;
+			}
+			.sw {
+				border: 1px solid var(--line);
+				border-radius: 0.5rem;
+				overflow: hidden;
+				width: 9.5rem;
+			}
+			.sw .chip {
+				height: 3.25rem;
+			}
+			.sw .meta {
+				padding: 0.5rem 0.6rem;
+				font-size: 0.6875rem;
+				line-height: 1.4;
+			}
+			.sw .meta b {
+				display: block;
+				font-size: 0.75rem;
+			}
+			.sw .meta span {
+				color: var(--ink-soft);
+				font-variant-numeric: tabular-nums;
+			}
+			.note {
+				margin-top: 1.1rem;
+				padding-top: 0.85rem;
+				border-top: 1px dashed var(--line);
+				font-size: 0.875rem;
+			}
+			.note strong {
+				color: var(--ink);
+			}
+		</style>
+	</head>
+	<body>
+		<main>
+			<div class="intro">
+				<h1>coruja — brand sheet</h1>
+				<p>
+					Every image below is loaded from <code>static/</code>. Nothing on this page redraws the
+					mark, so what you are looking at is the artefact that ships. If something here looks
+					wrong, the generator is wrong.
+				</p>
+				<p>
+					Regenerate with <code>node scripts/build-marks.mjs</code> and
+					<code>node scripts/build-lockup.mjs</code>. The reasoning behind all of it is in
+					<code>DESIGN.md</code>.
+				</p>
+			</div>
+
+			<section>
+				<h2>Lockup</h2>
+				<p>Mark and name as one file, with the spacing fixed inside it. 22 px tall is the floor.</p>
+				<div class="band light">
+					<figure>
+						<img src="../static/lockup.svg" height="88" alt="coruja" />
+						<figcaption>88 px</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup.svg" height="44" alt="coruja" />
+						<figcaption>44 px</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup.svg" height="28" alt="coruja" />
+						<figcaption>28 px — header</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup.svg" height="22" alt="coruja" />
+						<figcaption>22 px — floor</figcaption>
+					</figure>
+				</div>
+				<div class="band dark">
+					<figure>
+						<img src="../static/lockup-inverse.svg" height="88" alt="coruja" />
+						<figcaption>88 px</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup-inverse.svg" height="44" alt="coruja" />
+						<figcaption>44 px</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup-inverse.svg" height="28" alt="coruja" />
+						<figcaption>28 px</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/lockup-inverse.svg" height="22" alt="coruja" />
+						<figcaption>22 px</figcaption>
+					</figure>
+				</div>
+			</section>
+
+			<section>
+				<h2>Icons</h2>
+				<p>
+					<code>icon.svg</code> is the favicon and the <code>any</code> PWA icon — transparent,
+					colour baked in. <code>icon-maskable.svg</code> is full-bleed for Android, where
+					transparency would expose the launcher's own backdrop.
+				</p>
+				<div class="band light">
+					<figure>
+						<img src="../static/icon.svg" width="128" height="128" alt="" />
+						<figcaption>any — 128</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/icon.svg" width="48" height="48" alt="" />
+						<figcaption>48</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/icon.svg" width="32" height="32" alt="" />
+						<figcaption>32</figcaption>
+					</figure>
+					<figure>
+						<img src="../static/icon.svg" width="16" height="16" alt="" />
+						<figcaption>16 — favicon</figcaption>
+					</figure>
+					<figure>
+						<div class="tile round" style="width: 128px; height: 128px">
+							<img src="../static/icon-maskable.svg" width="128" height="128" alt="" />
+						</div>
+						<figcaption>maskable — circle</figcaption>
+					</figure>
+					<figure>
+						<div class="tile sq" style="width: 128px; height: 128px">
+							<img src="../static/icon-maskable.svg" width="128" height="128" alt="" />
+						</div>
+						<figcaption>maskable — squircle</figcaption>
+					</figure>
+				</div>
+				<p class="note">
+					<strong>Check the browser tab.</strong> This page uses the real <code>icon.svg</code> as
+					its favicon. Indigo is correct; black would mean <code>currentColor</code> has leaked into
+					a file that gets loaded as an image.
+				</p>
+			</section>
+
+			<section>
+				<h2>Colour</h2>
+				<p>
+					One accent, a warm off-white ground, and three states. Contrast figures are against
+					<code>--bg</code> and are the floor, not the target — this app is used by children in bad
+					light and by adults at the end of the day.
+				</p>
+				<div class="swatches">
+					<div class="sw">
+						<div class="chip" style="background: var(--accent)"></div>
+						<div class="meta"><b>--accent</b><span>#4b3f9e · 7.79:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--accent-soft)"></div>
+						<div class="meta"><b>--accent-soft</b><span>#eceafa · ground only</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--ink)"></div>
+						<div class="meta"><b>--ink</b><span>#1a1a1a · 16.8:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--ink-soft)"></div>
+						<div class="meta"><b>--ink-soft</b><span>#56545e · 7.17:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--gold)"></div>
+						<div class="meta"><b>--gold</b><span>#8a5a00 · 5.72:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--gold-fill)"></div>
+						<div class="meta"><b>--gold-fill</b><span>#f5c451 · ground only</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--grow)"></div>
+						<div class="meta"><b>--grow</b><span>#1f6f4a · 5.91:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--alert)"></div>
+						<div class="meta"><b>--alert</b><span>#a32020 · 6.60:1</span></div>
+					</div>
+					<div class="sw">
+						<div class="chip" style="background: var(--line)"></div>
+						<div class="meta"><b>--line</b><span>#e3e2e8 · borders</span></div>
+					</div>
+				</div>
+				<p class="note">
+					<strong>Two golds, on purpose.</strong> <code>--gold-fill</code> is a badge or a medal,
+					and never carries text. <code>--gold</code> is the text-safe version for an award label.
+					Using the bright one for words would fail contrast at exactly the moment a child is being
+					told they achieved something.
+				</p>
+			</section>
+		</main>
+	</body>
+</html>

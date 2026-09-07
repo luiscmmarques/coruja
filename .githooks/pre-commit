@@ -1,0 +1,94 @@
+#!/bin/sh
+# Pre-commit guard. Two jobs, both from a deliberate decision (see AGENTS.md):
+#
+# 1. Personal data must not reach the repository. This app's users are a family —
+#    including a child — and the repo is public. Exported shelves carry reader names
+#    and reading history; .private-words holds terms that identify the family.
+#
+# 2. Documentation is revisited when the code grows. A new screen or model change
+#    without a docs change is usually a docs gap, and PLAN.md going stale is how the
+#    guardrails stop being enforced.
+#
+# Installed via `git config core.hooksPath .githooks`, which `npm install` runs for
+# you (see the prepare script). Bypass for a genuine false positive:
+#    CORUJA_SKIP_DOCS=1 git commit …     (docs nag only)
+#    git commit --no-verify              (everything; say why in the commit message)
+
+set -eu
+
+staged_files=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$staged_files" ] && exit 0
+
+fail() {
+	echo "" >&2
+	echo "pre-commit: $1" >&2
+	echo "$2" >&2
+	exit 1
+}
+
+# --- 1. Files that are personal data by their nature -------------------------------
+
+for f in $staged_files; do
+	base=$(basename "$f")
+	case "$base" in
+		coruja-backup*.json)
+			fail "'$f' looks like an exported shelf." \
+				"A backup carries reader names and reading history. Keep it out of the repository." ;;
+		.env|.env.*)
+			fail "'$f' is an environment file." \
+				"Secrets and local configuration stay local. Add the variable to STACK.md instead, without its value." ;;
+		*.har)
+			fail "'$f' is a recorded browser session." \
+				"HAR files carry cookies, addresses and every request body. Never commit one." ;;
+	esac
+done
+
+# --- 2. Staged content that carries the backup signature ---------------------------
+# An exported shelf is identifiable by its envelope, whatever the file is named.
+# Markdown is excluded: documentation *describing* the envelope (AGENTS.md does)
+# is not a backup, and a real export is never a .md file.
+
+# fixtures/ is the one sanctioned home for a committed backup file: invented
+# readers, invented readings, built by scripts, never exported from a real shelf.
+if git diff --cached -U0 -- . ':(exclude)src/lib/domain/transfer*' ':(exclude).githooks/*' \
+	':(exclude)*.md' ':(exclude)fixtures/*' \
+	| grep -E '^\+' | grep -q '"app": *"coruja"'; then
+	fail "staged content contains a coruja backup envelope." \
+		"That is somebody's shelf — reader names included. Use an invented fixture instead (see transfer.test.ts)."
+fi
+
+# --- 3. The family's own words ------------------------------------------------------
+# .private-words is gitignored and holds one term per line — names, nicknames,
+# a school, a street. It is gitignored precisely so the denylist itself never
+# publishes what it protects. Create it once per clone; see .private-words.example.
+
+if [ -f .private-words ]; then
+	while IFS= read -r word; do
+		[ -z "$word" ] && continue
+		case "$word" in \#*) continue ;; esac
+		if git diff --cached -U0 | grep -E '^\+' | grep -iqF -- "$word"; then
+			fail "staged changes contain a term from .private-words." \
+				"One of the protected words appears in this commit. If it is a false positive, commit with --no-verify and say why."
+		fi
+	done < .private-words
+fi
+
+# --- 4. New code without a docs visit ------------------------------------------------
+# New files under src/ are the feature-shaped signal. Modified files nag nobody:
+# a bugfix should not demand a documentation ceremony.
+
+new_src=$(git diff --cached --name-only --diff-filter=A | grep '^src/' || true)
+docs_touched=$(printf '%s\n' "$staged_files" | grep -E '\.(md)$' || true)
+
+if [ -n "$new_src" ] && [ -z "$docs_touched" ] && [ "${CORUJA_SKIP_DOCS:-}" != "1" ]; then
+	fail "new source files, no documentation change." \
+		"New files:
+$new_src
+
+A new feature revisits the documentation (AGENTS.md, 'Definition of done'):
+PLAN.md for scope, AGENTS.md for new invariants or traps, the Privacy page if
+any request changed, README if a person would care. If nothing truly needs
+updating, say so with: CORUJA_SKIP_DOCS=1 git commit …"
+fi
+
+exit 0

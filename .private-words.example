@@ -1,0 +1,11 @@
+# Copy this file to .private-words (which is gitignored) and list, one per line,
+# the words that identify your family: first names, nicknames, a school, a street.
+# The pre-commit hook blocks any commit whose added lines contain one of them,
+# case-insensitively.
+#
+# The real file is gitignored on purpose: a committed denylist would itself
+# publish exactly what it exists to protect. Lines starting with # are ignored.
+#
+# Example entries (replace with real ones in your local copy):
+# Sofia
+# rue de l'Exemple

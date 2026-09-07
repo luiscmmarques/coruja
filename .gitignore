@@ -1,0 +1,8 @@
+.fonts/
+node_modules/
+__pycache__/
+*.pyc
+.DS_Store
+build
+.svelte-kit
+.private-words

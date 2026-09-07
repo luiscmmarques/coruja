@@ -1,0 +1,54 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+		<!--
+			No page title, description or canonical here: every route sets its own title and description in svelte:head, and the layout sets a per-page canonical. A static canonical in this file claimed every page was a duplicate of the home page, which is exactly what the tag exists to deny. The Open Graph tags stay static because they describe the site rather than the page, and a link preview reads the prerendered HTML without running it.
+		-->
+		<meta name="theme-color" content="#4b3f9e" />
+		<meta name="color-scheme" content="light" />
+
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="coruja" />
+		<meta property="og:title" content="coruja: a family reading tracker" />
+		<meta
+			property="og:description"
+			content="Scan a book, watch it fill itself in, and climb the ladder by finishing it. Free, no account, works offline."
+		/>
+		<meta property="og:url" content="https://coruja.app/" />
+		<meta property="og:locale" content="en" />
+		<meta property="og:image" content="https://coruja.app/icon-512.png" />
+		<meta property="og:image:width" content="512" />
+		<meta property="og:image:height" content="512" />
+		<meta name="twitter:card" content="summary" />
+
+		<!--
+			SVG first, so the tab icon is drawn at whatever size the browser wants. Colour is baked into icon.svg — a favicon has no inheriting context, so currentColor there would resolve to black.
+		-->
+		<link rel="icon" href="/icon.svg" type="image/svg+xml" />
+		<!-- Requested unconditionally by browsers whatever the link above says; without the file every visit logs a 404. -->
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<!-- iOS ignores manifest icons for the home screen and uses this one, which must be opaque or it renders on black. -->
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+
+		<!--
+			Both, on purpose: `mobile-web-app-capable` is the standardised name current browsers want; the `apple-` prefixed one is what older iOS reads, and iOS is where home-screen install matters most since Safari has no install prompt.
+		-->
+		<meta name="mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-title" content="coruja" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+
+		<!--
+			The manifest, linked by hand: @vite-pwa/sveltekit generates the file but does not get its <link> into SvelteKit's prerendered HTML. Without this line the manifest is generated, precached, served — and the app still cannot be installed.
+		-->
+		<link rel="manifest" href="/manifest.webmanifest" />
+
+		%sveltekit.head%
+	</head>
+	<body data-sveltekit-preload-data="hover">
+		<div style="display: contents">%sveltekit.body%</div>
+	</body>
+</html>

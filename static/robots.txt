@@ -1,0 +1,4 @@
+# coruja — https://coruja.app
+User-agent: *
+Allow: /
+Sitemap: https://coruja.app/sitemap.xml

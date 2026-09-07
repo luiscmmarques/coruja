@@ -1,0 +1,7 @@
+# coruja security contact (RFC 9116)
+# The app is local-first and has no server, but a vulnerability in the code
+# it ships (CSP bypass, backup parsing, the scanner) is still worth reporting.
+Contact: mailto:hi+security@coruja.app
+Expires: 2027-09-07T12:00:00.000Z
+Canonical: https://coruja.app/.well-known/security.txt
+Preferred-Languages: en, fr, pt

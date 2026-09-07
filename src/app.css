@@ -1,0 +1,170 @@
+/*
+ * Global styles. Tokens from DESIGN.md — one accent, a warm off-white ground, three states. The interface uses the system font stack: no webfont, no invisible text on a slow connection, type that already matches the phone it is on. Quicksand exists only inside the wordmark files.
+ */
+
+:root {
+	--accent: #4b3f9e;
+	--accent-soft: #eceafa;
+	--gold: #8a5a00;
+	--gold-fill: #f5c451;
+	--grow: #1f6f4a;
+	--alert: #a32020;
+	--bg: #fbfbf9;
+	--surface: #ffffff;
+	--ink: #1a1a1a;
+	--ink-soft: #56545e;
+	--line: #e3e2e8;
+	--radius: 0.625rem;
+	/*
+	 * 44px minimum tap target, and it matters more here than in most apps: the primary user is a child, and children have worse fine motor control than the adults who design for them.
+	 */
+	--tap: 2.75rem;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html {
+	background: var(--bg);
+	color: var(--ink);
+	font-family:
+		system-ui,
+		-apple-system,
+		'Segoe UI',
+		sans-serif;
+	line-height: 1.5;
+	-webkit-text-size-adjust: 100%;
+}
+
+body {
+	margin: 0;
+	min-height: 100dvh;
+}
+
+h1,
+h2,
+h3 {
+	line-height: 1.2;
+	margin: 0 0 0.5rem;
+}
+
+h1 {
+	font-size: 1.375rem;
+}
+
+h2 {
+	font-size: 1.0625rem;
+}
+
+p {
+	margin: 0.25rem 0;
+}
+
+a {
+	color: var(--accent);
+}
+
+button,
+input,
+select {
+	font: inherit;
+	color: inherit;
+}
+
+button {
+	min-height: var(--tap);
+	padding: 0.4rem 1rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--surface);
+	cursor: pointer;
+}
+
+button.primary {
+	background: var(--accent);
+	border-color: var(--accent);
+	color: #fff;
+	font-weight: 600;
+}
+
+/* Secondary call to action: clearly a button, clearly not the main one. */
+button.outline {
+	border-color: var(--accent);
+	color: var(--accent);
+	font-weight: 600;
+}
+
+button.quiet {
+	border: none;
+	background: none;
+	padding: 0.4rem 0.5rem;
+}
+
+/*
+ * A round icon button. Every list row gets at most one text CTA; everything else is an
+ * icon with an aria-label — rows of stacked text buttons were what made the app feel
+ * unusable ("SophiaSnoEdit").
+ */
+button.icon {
+	display: inline-grid;
+	place-items: center;
+	width: var(--tap);
+	min-width: var(--tap);
+	height: var(--tap);
+	padding: 0;
+	border: none;
+	background: none;
+	border-radius: 50%;
+	color: var(--ink-soft);
+}
+
+button.icon:hover,
+button.icon:focus-visible {
+	background: var(--accent-soft);
+	color: var(--accent);
+}
+
+input[type='text'],
+input[type='search'],
+input[type='number'],
+select {
+	min-height: var(--tap);
+	padding: 0.4rem 0.75rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--surface);
+	width: 100%;
+}
+
+input:focus-visible,
+button:focus-visible,
+select:focus-visible,
+a:focus-visible {
+	outline: 2px solid var(--accent);
+	outline-offset: 2px;
+}
+
+.card {
+	background: var(--surface);
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	padding: 1rem;
+}
+
+.muted {
+	color: var(--ink-soft);
+}
+
+/* Status is never colour alone — these always sit next to words. */
+.status-reading {
+	color: var(--accent);
+}
+
+.status-finished {
+	color: var(--grow);
+}
+
+.error {
+	color: var(--alert);
+}

@@ -1,0 +1,64 @@
+# Cloudflare Pages response headers.
+#
+# The rule that matters for the back/forward cache: the HTML document must never be served with `Cache-Control: no-store`. That value disqualifies a page from bfcache outright in Chrome, and the symptom is invisible — back navigation is simply slow, with nothing logged anywhere. `no-cache` is fine and is what we want: revalidate every time, but stay eligible.
+
+/*
+  # Referrer and framing. A children's reading tracker has no business being embedded.
+  X-Frame-Options: DENY
+  Referrer-Policy: strict-origin-when-cross-origin
+  X-Content-Type-Options: nosniff
+  # The full policy is generated in vite.config.ts and delivered in a <meta> tag, because its hashes have to describe the bundle that actually shipped. `frame-ancestors` stays here: browsers ignore it in a <meta> tag.
+  Content-Security-Policy: frame-ancestors 'none'
+  # Redundant on `.app`, which is HSTS-preloaded at the top level — browsers already refuse plain HTTP for the whole TLD. Present anyway, because it costs one line and the protection would otherwise be silently absent if the app were ever served from a domain without that guarantee.
+  Strict-Transport-Security: max-age=31536000; includeSubDomains
+  # The camera is the scanner and nothing else may have it; every other powerful
+  # API is switched off wholesale. A policy that lists what the app truly uses is
+  # also documentation of what it does not.
+  Permissions-Policy: camera=(self), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=()
+  # No window this app opens should share a browsing context group with it.
+  Cross-Origin-Opener-Policy: same-origin
+
+# Every prerendered document, revalidated on every request.
+#
+# Each route is prerendered as its own HTML shell, and each one references asset filenames that contain a content hash. So a stale document is not merely out of date — it points at files that no longer exist after the next deploy, and the app fails to boot. The list must cover every route; src/lib/headers.test.ts fails if one is missing.
+#
+# `/` needs its own entry: Cloudflare matches the request path, and a request for `/` does not match `/index.html`.
+#
+# `no-transform` stops Cloudflare rewriting these documents at the edge. Bot Fight Mode's JavaScript Detections injects an inline script into every HTML response, which this app's CSP then blocks, logging a violation on every page load. `no-transform` is the documented opt-out, and unlike `no-store` it carries no caching cost.
+/
+  Cache-Control: no-cache, no-transform
+
+/index.html
+  Cache-Control: no-cache, no-transform
+
+/scan
+  Cache-Control: no-cache, no-transform
+
+/badges
+  Cache-Control: no-cache, no-transform
+
+/setup
+  Cache-Control: no-cache, no-transform
+
+/about
+  Cache-Control: no-cache, no-transform
+
+/privacy
+  Cache-Control: no-cache, no-transform
+
+/support
+  Cache-Control: no-cache, no-transform
+
+/404.html
+  Cache-Control: no-cache, no-transform
+
+# Hashed filenames, so these can never go stale.
+/_app/immutable/*
+  Cache-Control: public, max-age=31536000, immutable
+
+# Must revalidate, or an update can never be picked up. The service worker is the app's update mechanism: a cached worker is a version pin nobody chose.
+/service-worker.js
+  Cache-Control: no-cache
+
+/manifest.webmanifest
+  Cache-Control: no-cache

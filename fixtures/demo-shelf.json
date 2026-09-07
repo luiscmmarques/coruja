@@ -1,0 +1,2023 @@
+{
+ "app": "coruja",
+ "version": 1,
+ "exportedAt": "2026-09-07T11:08:01.711Z",
+ "readers": [
+  {
+   "id": "demo-luna",
+   "name": "Luna",
+   "emoji": "🦊",
+   "colour": "#4b3f9e",
+   "createdAt": "2025-03-10T12:00:00.000Z"
+  },
+  {
+   "id": "demo-mama",
+   "name": "Mama",
+   "emoji": "🦉",
+   "colour": "#1f6f4a",
+   "createdAt": "2025-03-10T12:00:00.000Z",
+   "adult": true
+  },
+  {
+   "id": "demo-papa",
+   "name": "Papa",
+   "emoji": "🐻",
+   "colour": "#8a5a00",
+   "createdAt": "2025-03-11T12:00:00.000Z",
+   "adult": true
+  }
+ ],
+ "books": [
+  {
+   "id": "demo-b0",
+   "title": "Le petit prince",
+   "authors": [
+    "Antoine de Saint-Exupéry"
+   ],
+   "addedAt": "2025-03-10T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9783596520428",
+   "publisher": "Gallimard",
+   "pageCount": 96,
+   "language": "fr",
+   "publishedYear": 1943
+  },
+  {
+   "id": "demo-b1",
+   "title": "Le cousin de Max et Lili se drogue",
+   "authors": [
+    "Serge Bloch"
+   ],
+   "addedAt": "2025-03-15T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9782884800228",
+   "publisher": "Calligram",
+   "pageCount": 45,
+   "language": "fr",
+   "publishedYear": 2003,
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b2",
+   "title": "La sorcière de la rue Mouffetard",
+   "authors": [
+    "Pierre Gripari"
+   ],
+   "addedAt": "2025-03-20T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9782070513307",
+   "publisher": "Gallimard",
+   "pageCount": 152,
+   "language": "fr",
+   "publishedYear": 1987,
+   "collectionIds": [
+    "demo-c4",
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b3",
+   "title": "Le loup qui voulait changer de couleur",
+   "authors": [
+    "Orianne Lallemand"
+   ],
+   "addedAt": "2025-03-25T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9782733820278",
+   "publisher": "Auzou",
+   "pageCount": 32,
+   "language": "fr",
+   "publishedYear": 2012,
+   "purchasePrice": 6
+  },
+  {
+   "id": "demo-b4",
+   "title": "My First Gruffalo Opposites",
+   "authors": [
+    "Julia Donaldson"
+   ],
+   "addedAt": "2025-03-30T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788469603215",
+   "publisher": "Gallimard Jeunesse",
+   "pageCount": 10,
+   "language": "fr",
+   "publishedYear": 2011,
+   "shelfLocation": "chambre Luna",
+   "collectionIds": [
+    "demo-c5"
+   ]
+  },
+  {
+   "id": "demo-b5",
+   "title": "Die kleine Raupe Nimmersatt",
+   "authors": [
+    "Eric Carle"
+   ],
+   "addedAt": "2025-04-04T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788496629523",
+   "publisher": "Gerstenberg",
+   "pageCount": 26,
+   "language": "de",
+   "publishedYear": 1969,
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b6",
+   "title": "Momo",
+   "authors": [
+    "Michael Ende"
+   ],
+   "addedAt": "2025-04-09T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788324028191",
+   "publisher": "Thienemann",
+   "pageCount": 269,
+   "language": "de",
+   "publishedYear": 1973,
+   "shelfLocation": "chambre Luna",
+   "purchasePrice": 23
+  },
+  {
+   "id": "demo-b7",
+   "title": "Die kleine Hexe",
+   "authors": [
+    "Otfried Preußler"
+   ],
+   "addedAt": "2025-04-14T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9783522105804",
+   "publisher": "Thienemann",
+   "pageCount": 127,
+   "language": "de",
+   "publishedYear": 1957
+  },
+  {
+   "id": "demo-b8",
+   "title": "Meine Freundin Conni",
+   "authors": [
+    "Julia Boehme"
+   ],
+   "addedAt": "2025-04-19T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9783551552907",
+   "publisher": "Carlsen",
+   "pageCount": 90,
+   "language": "de",
+   "publishedYear": 2007,
+   "shelfLocation": "chambre Luna",
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b9",
+   "title": "O principezinho",
+   "authors": [
+    "Antoine de Saint-Exupéry"
+   ],
+   "addedAt": "2025-04-24T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9789721039698",
+   "publisher": "Caravela",
+   "pageCount": 93,
+   "language": "pt",
+   "publishedYear": 1987,
+   "collectionIds": [
+    "demo-c5"
+   ]
+  },
+  {
+   "id": "demo-b10",
+   "title": "A Fada Oriana",
+   "authors": [
+    "Sophia de Mello Breyner Andresen"
+   ],
+   "addedAt": "2025-04-29T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9789726611950",
+   "publisher": "Figueirinhas",
+   "pageCount": 94,
+   "language": "pt",
+   "publishedYear": 1958,
+   "purchasePrice": 12
+  },
+  {
+   "id": "demo-b11",
+   "title": "O Cavaleiro da Dinamarca",
+   "authors": [
+    "Sophia de Mello Breyner Andresen"
+   ],
+   "addedAt": "2025-05-04T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9789720726353",
+   "publisher": "Porto Editora",
+   "pageCount": 65,
+   "language": "pt",
+   "publishedYear": 1964,
+   "purchasePrice": 10
+  },
+  {
+   "id": "demo-b12",
+   "title": "O gato malhado e a andorinha Sinhá",
+   "authors": [
+    "Jorge Amado"
+   ],
+   "addedAt": "2025-05-09T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9789722020244",
+   "publisher": "Leya",
+   "pageCount": 110,
+   "language": "pt",
+   "publishedYear": 2001
+  },
+  {
+   "id": "demo-b13",
+   "title": "Matilda",
+   "authors": [
+    "Roald Dahl"
+   ],
+   "addedAt": "2025-05-14T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9783499211829",
+   "publisher": "Jonathan Cape",
+   "pageCount": 240,
+   "language": "en",
+   "publishedYear": 1988,
+   "shelfLocation": "salon, étagère haute",
+   "purchasePrice": 17
+  },
+  {
+   "id": "demo-b14",
+   "title": "Charlotte's Web",
+   "authors": [
+    "E. B. White"
+   ],
+   "addedAt": "2025-05-19T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9780739330418",
+   "publisher": "Hamilton",
+   "pageCount": 184,
+   "language": "en",
+   "publishedYear": 1952,
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b15",
+   "title": "The Gruffalo",
+   "authors": [
+    "Julia Donaldson"
+   ],
+   "addedAt": "2025-05-24T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9781845025038",
+   "publisher": "Macmillan",
+   "pageCount": 32,
+   "language": "en",
+   "publishedYear": 1999
+  },
+  {
+   "id": "demo-b16",
+   "title": "Harry Potter and the Philosopher's Stone",
+   "authors": [
+    "J. K. Rowling"
+   ],
+   "addedAt": "2025-05-29T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9780545919661",
+   "publisher": "Bloomsbury",
+   "pageCount": 302,
+   "language": "en",
+   "publishedYear": 1997,
+   "purchasePrice": 22
+  },
+  {
+   "id": "demo-b17",
+   "title": "Diary of a Wimpy Kid",
+   "authors": [
+    "Jeff Kinney"
+   ],
+   "addedAt": "2025-06-03T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9780141324906",
+   "publisher": "Puffin",
+   "pageCount": 224,
+   "language": "en",
+   "publishedYear": 2007,
+   "purchasePrice": 22
+  },
+  {
+   "id": "demo-b18",
+   "title": "Le avventure di Pinocchio",
+   "authors": [
+    "Carlo Collodi"
+   ],
+   "addedAt": "2025-06-08T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788711093580",
+   "publisher": "Einaudi",
+   "pageCount": 203,
+   "language": "it",
+   "publishedYear": 1883,
+   "shelfLocation": "salon, étagère basse"
+  },
+  {
+   "id": "demo-b19",
+   "title": "Favole al telefono",
+   "authors": [
+    "Gianni Rodari"
+   ],
+   "addedAt": "2025-06-13T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788879262019",
+   "publisher": "Einaudi",
+   "pageCount": 141,
+   "language": "it",
+   "publishedYear": 1962,
+   "shelfLocation": "salon, étagère basse"
+  },
+  {
+   "id": "demo-b20",
+   "title": "È Natale, Stilton!",
+   "authors": [
+    "Elisabetta Dami"
+   ],
+   "addedAt": "2025-06-18T12:00:00.000Z",
+   "source": "scan",
+   "isbn13": "9788408074502",
+   "publisher": "Piemme",
+   "pageCount": 117,
+   "language": "it",
+   "publishedYear": 2002,
+   "shelfLocation": "chambre Luna"
+  },
+  {
+   "id": "demo-b21",
+   "title": "Max et Lili ont peur du noir",
+   "authors": [
+    "Daniel Pennac"
+   ],
+   "addedAt": "2025-06-23T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Auzou",
+   "pageCount": 233,
+   "language": "fr"
+  },
+  {
+   "id": "demo-b22",
+   "title": "Max et Lili vont à la bibliothèque",
+   "authors": [
+    "Dominique de Saint Mars"
+   ],
+   "addedAt": "2025-06-28T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 44,
+   "language": "fr",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b23",
+   "title": "Lili se dispute avec son frère",
+   "authors": [
+    "Mary Pope Osborne"
+   ],
+   "addedAt": "2025-07-03T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Gallimard Jeunesse",
+   "pageCount": 81,
+   "language": "fr",
+   "shelfLocation": "salon, étagère basse",
+   "purchasePrice": 10.5,
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b24",
+   "title": "Max adore jouer",
+   "authors": [
+    "Pierre Bertrand"
+   ],
+   "addedAt": "2025-07-08T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Gallimard Jeunesse",
+   "pageCount": 134,
+   "language": "fr",
+   "shelfLocation": "salon, étagère haute"
+  },
+  {
+   "id": "demo-b25",
+   "title": "Lili veut un chat",
+   "authors": [
+    "Dominique de Saint Mars"
+   ],
+   "addedAt": "2025-07-13T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "L'école des loisirs",
+   "pageCount": 136,
+   "language": "fr",
+   "purchasePrice": 16.5
+  },
+  {
+   "id": "demo-b26",
+   "title": "La cabane magique: La vallée des dinosaures",
+   "authors": [
+    "Pierre Bertrand"
+   ],
+   "addedAt": "2025-07-18T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "L'école des loisirs",
+   "pageCount": 187,
+   "language": "fr",
+   "shelfLocation": "chambre Luna",
+   "purchasePrice": 10,
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b27",
+   "title": "La cabane magique: Le mystérieux chevalier",
+   "authors": [
+    "Pierre Bertrand"
+   ],
+   "addedAt": "2025-07-23T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 280,
+   "language": "fr",
+   "collectionIds": [
+    "demo-c3",
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b28",
+   "title": "Le loup qui découvrait le pays des contes",
+   "authors": [
+    "Dominique de Saint Mars"
+   ],
+   "addedAt": "2025-07-28T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Gallimard Jeunesse",
+   "pageCount": 176,
+   "language": "fr",
+   "purchasePrice": 5.5
+  },
+  {
+   "id": "demo-b29",
+   "title": "Le loup qui avait la tête dans les étoiles",
+   "authors": [
+    "Daniel Pennac"
+   ],
+   "addedAt": "2025-08-02T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "L'école des loisirs",
+   "pageCount": 144,
+   "language": "fr"
+  },
+  {
+   "id": "demo-b30",
+   "title": "L'école des loisirs: Cornebidouille",
+   "authors": [
+    "René Goscinny"
+   ],
+   "addedAt": "2025-08-07T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 57,
+   "language": "fr",
+   "purchasePrice": 16.5
+  },
+  {
+   "id": "demo-b31",
+   "title": "Pas de pitié pour les poupées B.",
+   "authors": [
+    "Pierre Bertrand"
+   ],
+   "addedAt": "2025-08-12T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Calligram",
+   "pageCount": 47,
+   "language": "fr"
+  },
+  {
+   "id": "demo-b32",
+   "title": "Le crime de Cornin Bouchon",
+   "authors": [
+    "René Goscinny"
+   ],
+   "addedAt": "2025-08-17T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Calligram",
+   "pageCount": 270,
+   "language": "fr",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b33",
+   "title": "Les doigts rouges",
+   "authors": [
+    "Marie-Aude Murail"
+   ],
+   "addedAt": "2025-08-22T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Auzou",
+   "pageCount": 143,
+   "language": "fr",
+   "purchasePrice": 8,
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b34",
+   "title": "Kamo et moi",
+   "authors": [
+    "Dominique de Saint Mars"
+   ],
+   "addedAt": "2025-08-27T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 281,
+   "language": "fr",
+   "purchasePrice": 16.5,
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b35",
+   "title": "Le chien des mers",
+   "authors": [
+    "Orianne Lallemand"
+   ],
+   "addedAt": "2025-09-01T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "L'école des loisirs",
+   "pageCount": 254,
+   "language": "fr",
+   "shelfLocation": "salon, étagère haute",
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b36",
+   "title": "Trois sorcières",
+   "authors": [
+    "Marie-Aude Murail"
+   ],
+   "addedAt": "2025-09-06T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 222,
+   "language": "fr",
+   "purchasePrice": 4.5
+  },
+  {
+   "id": "demo-b37",
+   "title": "La reine des fourmis a disparu",
+   "authors": [
+    "Mary Pope Osborne"
+   ],
+   "addedAt": "2025-09-11T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Calligram",
+   "pageCount": 141,
+   "language": "fr",
+   "purchasePrice": 5
+  },
+  {
+   "id": "demo-b38",
+   "title": "Ariol: Un petit âne comme vous et moi",
+   "authors": [
+    "Mary Pope Osborne"
+   ],
+   "addedAt": "2025-09-16T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Bayard Jeunesse",
+   "pageCount": 35,
+   "language": "fr",
+   "purchasePrice": 19.5
+  },
+  {
+   "id": "demo-b39",
+   "title": "Astérix chez les Helvètes",
+   "authors": [
+    "Dominique de Saint Mars"
+   ],
+   "addedAt": "2025-09-21T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "L'école des loisirs",
+   "pageCount": 74,
+   "language": "fr",
+   "purchasePrice": 11,
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b40",
+   "title": "Le Petit Nicolas et les copains",
+   "authors": [
+    "Pierre Bertrand"
+   ],
+   "addedAt": "2025-09-26T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Auzou",
+   "pageCount": 204,
+   "language": "fr",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b41",
+   "title": "Der Räuber Hotzenplotz",
+   "authors": [
+    "Marcus Pfister"
+   ],
+   "addedAt": "2025-10-01T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Oetinger",
+   "pageCount": 181,
+   "language": "de"
+  },
+  {
+   "id": "demo-b42",
+   "title": "Das kleine Gespenst",
+   "authors": [
+    "Marcus Pfister"
+   ],
+   "addedAt": "2025-10-06T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 42,
+   "language": "de"
+  },
+  {
+   "id": "demo-b43",
+   "title": "Emil und die Detektive",
+   "authors": [
+    "Janosch"
+   ],
+   "addedAt": "2025-10-11T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "NordSüd",
+   "pageCount": 238,
+   "language": "de",
+   "collectionIds": [
+    "demo-c2",
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b44",
+   "title": "Das doppelte Lottchen",
+   "authors": [
+    "Otfried Preußler"
+   ],
+   "addedAt": "2025-10-16T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Oetinger",
+   "pageCount": 128,
+   "language": "de"
+  },
+  {
+   "id": "demo-b45",
+   "title": "Pippi Langstrumpf",
+   "authors": [
+    "Cornelia Funke"
+   ],
+   "addedAt": "2025-10-21T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Carlsen",
+   "pageCount": 196,
+   "language": "de"
+  },
+  {
+   "id": "demo-b46",
+   "title": "Michel aus Lönneberga",
+   "authors": [
+    "Astrid Lindgren"
+   ],
+   "addedAt": "2025-10-26T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 67,
+   "language": "de",
+   "purchasePrice": 7
+  },
+  {
+   "id": "demo-b47",
+   "title": "Die kleine Eule fliegt zu den Sternen",
+   "authors": [
+    "Paul Maar"
+   ],
+   "addedAt": "2025-10-31T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 69,
+   "language": "de",
+   "collectionIds": [
+    "demo-c3",
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b48",
+   "title": "Der Regenbogenfisch",
+   "authors": [
+    "Marcus Pfister"
+   ],
+   "addedAt": "2025-11-05T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Oetinger",
+   "pageCount": 202,
+   "language": "de"
+  },
+  {
+   "id": "demo-b49",
+   "title": "Frederick die Maus",
+   "authors": [
+    "Marcus Pfister"
+   ],
+   "addedAt": "2025-11-10T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 35,
+   "language": "de",
+   "shelfLocation": "salon, étagère haute",
+   "purchasePrice": 17.5,
+   "collectionIds": [
+    "demo-c5"
+   ]
+  },
+  {
+   "id": "demo-b50",
+   "title": "Oh, wie schön ist Panama",
+   "authors": [
+    "Paul Maar"
+   ],
+   "addedAt": "2025-11-15T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Oetinger",
+   "pageCount": 48,
+   "language": "de",
+   "purchasePrice": 15.5
+  },
+  {
+   "id": "demo-b51",
+   "title": "Post für den Tiger",
+   "authors": [
+    "Cornelia Funke"
+   ],
+   "addedAt": "2025-11-20T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Oetinger",
+   "pageCount": 252,
+   "language": "de",
+   "purchasePrice": 21.5
+  },
+  {
+   "id": "demo-b52",
+   "title": "Lars der kleine Eisbär",
+   "authors": [
+    "Leo Lionni"
+   ],
+   "addedAt": "2025-11-25T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Carlsen",
+   "pageCount": 103,
+   "language": "de",
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b53",
+   "title": "Die Olchis ziehen um",
+   "authors": [
+    "Andreas Steinhöfel"
+   ],
+   "addedAt": "2025-11-30T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 41,
+   "language": "de",
+   "purchasePrice": 10.5
+  },
+  {
+   "id": "demo-b54",
+   "title": "Das Sams: Eine Woche voller Samstage",
+   "authors": [
+    "Erich Kästner"
+   ],
+   "addedAt": "2025-12-05T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Carlsen",
+   "pageCount": 69,
+   "language": "de",
+   "shelfLocation": "chambre parents",
+   "purchasePrice": 12.5,
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b55",
+   "title": "Ronja Räubertochter",
+   "authors": [
+    "Leo Lionni"
+   ],
+   "addedAt": "2025-12-10T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 192,
+   "language": "de",
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b56",
+   "title": "Die unendliche Geschichte",
+   "authors": [
+    "Otfried Preußler"
+   ],
+   "addedAt": "2025-12-15T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "NordSüd",
+   "pageCount": 248,
+   "language": "de",
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b57",
+   "title": "Hände weg von Mississippi",
+   "authors": [
+    "Marcus Pfister"
+   ],
+   "addedAt": "2025-12-20T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Thienemann",
+   "pageCount": 259,
+   "language": "de",
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b58",
+   "title": "Rico, Oskar und die Tieferschatten",
+   "authors": [
+    "Astrid Lindgren"
+   ],
+   "addedAt": "2025-12-25T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Carlsen",
+   "pageCount": 136,
+   "language": "de"
+  },
+  {
+   "id": "demo-b59",
+   "title": "Uma Aventura na Cidade",
+   "authors": [
+    "Miguel Torga"
+   ],
+   "addedAt": "2025-12-30T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Caminho",
+   "pageCount": 190,
+   "language": "pt",
+   "purchasePrice": 7
+  },
+  {
+   "id": "demo-b60",
+   "title": "Uma Aventura nas Férias do Natal",
+   "authors": [
+    "Miguel Torga"
+   ],
+   "addedAt": "2026-01-04T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Caminho",
+   "pageCount": 265,
+   "language": "pt",
+   "shelfLocation": "salon, étagère haute"
+  },
+  {
+   "id": "demo-b61",
+   "title": "O Rapaz de Bronze",
+   "authors": [
+    "Ana Saldanha"
+   ],
+   "addedAt": "2026-01-09T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Caminho",
+   "pageCount": 73,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b62",
+   "title": "A Menina do Mar",
+   "authors": [
+    "Miguel Torga"
+   ],
+   "addedAt": "2026-01-14T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Leya",
+   "pageCount": 212,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b63",
+   "title": "A Floresta",
+   "authors": [
+    "Ana Maria Magalhães"
+   ],
+   "addedAt": "2026-01-19T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 70,
+   "language": "pt",
+   "purchasePrice": 19.5
+  },
+  {
+   "id": "demo-b64",
+   "title": "O Beijo da Palavrinha",
+   "authors": [
+    "Mia Couto"
+   ],
+   "addedAt": "2026-01-24T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Porto Editora",
+   "pageCount": 30,
+   "language": "pt",
+   "purchasePrice": 10,
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b65",
+   "title": "Os Primos e a Bruxa Cartuxa",
+   "authors": [
+    "Mia Couto"
+   ],
+   "addedAt": "2026-01-29T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Porto Editora",
+   "pageCount": 104,
+   "language": "pt",
+   "shelfLocation": "chambre Luna",
+   "collectionIds": [
+    "demo-c5",
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b66",
+   "title": "O Limpa-Palavras",
+   "authors": [
+    "José Saramago"
+   ],
+   "addedAt": "2026-02-03T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 75,
+   "language": "pt",
+   "shelfLocation": "chambre Luna",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b67",
+   "title": "A Girafa que Comia Estrelas",
+   "authors": [
+    "Sophia de Mello Breyner Andresen"
+   ],
+   "addedAt": "2026-02-08T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Porto Editora",
+   "pageCount": 275,
+   "language": "pt",
+   "collectionIds": [
+    "demo-c5"
+   ]
+  },
+  {
+   "id": "demo-b68",
+   "title": "O Planeta Branco",
+   "authors": [
+    "Mia Couto"
+   ],
+   "addedAt": "2026-02-13T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Leya",
+   "pageCount": 271,
+   "language": "pt",
+   "purchasePrice": 18
+  },
+  {
+   "id": "demo-b69",
+   "title": "Contos da Montanha",
+   "authors": [
+    "Miguel Torga"
+   ],
+   "addedAt": "2026-02-18T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Caminho",
+   "pageCount": 236,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b70",
+   "title": "A Maior Flor do Mundo",
+   "authors": [
+    "Ana Maria Magalhães"
+   ],
+   "addedAt": "2026-02-23T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 112,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b71",
+   "title": "O Príncipe Nabo",
+   "authors": [
+    "Mia Couto"
+   ],
+   "addedAt": "2026-02-28T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Porto Editora",
+   "pageCount": 141,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b72",
+   "title": "Robertices",
+   "authors": [
+    "Ana Maria Magalhães"
+   ],
+   "addedAt": "2026-03-05T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Leya",
+   "pageCount": 107,
+   "language": "pt",
+   "purchasePrice": 15.5,
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b73",
+   "title": "A Arca do Tesouro",
+   "authors": [
+    "José Saramago"
+   ],
+   "addedAt": "2026-03-10T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 188,
+   "language": "pt",
+   "collectionIds": [
+    "demo-c1"
+   ]
+  },
+  {
+   "id": "demo-b74",
+   "title": "Trinta por uma Linha",
+   "authors": [
+    "Ana Saldanha"
+   ],
+   "addedAt": "2026-03-15T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 65,
+   "language": "pt",
+   "shelfLocation": "chambre Luna"
+  },
+  {
+   "id": "demo-b75",
+   "title": "O Elefante Cor-de-Rosa",
+   "authors": [
+    "Ana Maria Magalhães"
+   ],
+   "addedAt": "2026-03-20T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 146,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b76",
+   "title": "A Viúva e o Papagaio",
+   "authors": [
+    "José Saramago"
+   ],
+   "addedAt": "2026-03-25T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Afrontamento",
+   "pageCount": 27,
+   "language": "pt"
+  },
+  {
+   "id": "demo-b77",
+   "title": "The BFG",
+   "authors": [
+    "Dr. Seuss"
+   ],
+   "addedAt": "2026-03-30T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "HarperCollins",
+   "pageCount": 145,
+   "language": "en",
+   "shelfLocation": "salon, étagère basse",
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b78",
+   "title": "Fantastic Mr Fox",
+   "authors": [
+    "Julia Donaldson"
+   ],
+   "addedAt": "2026-04-04T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Macmillan",
+   "pageCount": 200,
+   "language": "en"
+  },
+  {
+   "id": "demo-b79",
+   "title": "James and the Giant Peach",
+   "authors": [
+    "Roald Dahl"
+   ],
+   "addedAt": "2026-04-09T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Macmillan",
+   "pageCount": 172,
+   "language": "en",
+   "purchasePrice": 5.5
+  },
+  {
+   "id": "demo-b80",
+   "title": "The Twits",
+   "authors": [
+    "A. A. Milne"
+   ],
+   "addedAt": "2026-04-14T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "HarperCollins",
+   "pageCount": 240,
+   "language": "en",
+   "purchasePrice": 10.5,
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b81",
+   "title": "George's Marvellous Medicine",
+   "authors": [
+    "Dr. Seuss"
+   ],
+   "addedAt": "2026-04-19T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "HarperCollins",
+   "pageCount": 265,
+   "language": "en"
+  },
+  {
+   "id": "demo-b82",
+   "title": "The Cat in the Hat",
+   "authors": [
+    "Maurice Sendak"
+   ],
+   "addedAt": "2026-04-24T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Puffin",
+   "pageCount": 112,
+   "language": "en"
+  },
+  {
+   "id": "demo-b83",
+   "title": "Green Eggs and Ham",
+   "authors": [
+    "Maurice Sendak"
+   ],
+   "addedAt": "2026-04-29T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Puffin",
+   "pageCount": 258,
+   "language": "en",
+   "purchasePrice": 22,
+   "collectionIds": [
+    "demo-c5"
+   ]
+  },
+  {
+   "id": "demo-b84",
+   "title": "Where the Wild Things Are",
+   "authors": [
+    "A. A. Milne"
+   ],
+   "addedAt": "2026-05-04T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Macmillan",
+   "pageCount": 134,
+   "language": "en",
+   "purchasePrice": 7
+  },
+  {
+   "id": "demo-b85",
+   "title": "The Very Busy Spider",
+   "authors": [
+    "A. A. Milne"
+   ],
+   "addedAt": "2026-05-09T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Puffin",
+   "pageCount": 136,
+   "language": "en",
+   "collectionIds": [
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b86",
+   "title": "Room on the Broom",
+   "authors": [
+    "Julia Donaldson"
+   ],
+   "addedAt": "2026-05-14T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Macmillan",
+   "pageCount": 136,
+   "language": "en",
+   "collectionIds": [
+    "demo-c2",
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b87",
+   "title": "Stick Man",
+   "authors": [
+    "Maurice Sendak"
+   ],
+   "addedAt": "2026-05-19T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Puffin",
+   "pageCount": 142,
+   "language": "en",
+   "shelfLocation": "chambre parents",
+   "purchasePrice": 7.5
+  },
+  {
+   "id": "demo-b88",
+   "title": "Zog",
+   "authors": [
+    "Maurice Sendak"
+   ],
+   "addedAt": "2026-05-24T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Puffin",
+   "pageCount": 85,
+   "language": "en",
+   "purchasePrice": 8
+  },
+  {
+   "id": "demo-b89",
+   "title": "The Snail and the Whale",
+   "authors": [
+    "A. A. Milne"
+   ],
+   "addedAt": "2026-05-29T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Macmillan",
+   "pageCount": 241,
+   "language": "en"
+  },
+  {
+   "id": "demo-b90",
+   "title": "Winnie-the-Pooh",
+   "authors": [
+    "Dr. Seuss"
+   ],
+   "addedAt": "2026-06-03T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "HarperCollins",
+   "pageCount": 239,
+   "language": "en",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  },
+  {
+   "id": "demo-b91",
+   "title": "Il piccolo principe",
+   "authors": [
+    "Elisabetta Dami"
+   ],
+   "addedAt": "2026-06-08T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Piemme",
+   "pageCount": 253,
+   "language": "it",
+   "collectionIds": [
+    "demo-c1",
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b92",
+   "title": "Cipollino",
+   "authors": [
+    "Italo Calvino"
+   ],
+   "addedAt": "2026-06-13T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Einaudi Ragazzi",
+   "pageCount": 71,
+   "language": "it"
+  },
+  {
+   "id": "demo-b93",
+   "title": "La freccia azzurra",
+   "authors": [
+    "Gianni Rodari"
+   ],
+   "addedAt": "2026-06-18T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Piemme",
+   "pageCount": 30,
+   "language": "it"
+  },
+  {
+   "id": "demo-b94",
+   "title": "Il libro degli errori",
+   "authors": [
+    "Italo Calvino"
+   ],
+   "addedAt": "2026-06-23T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Mondadori",
+   "pageCount": 33,
+   "language": "it"
+  },
+  {
+   "id": "demo-b95",
+   "title": "Geronimo Stilton: Il mistero del tesoro scomparso",
+   "authors": [
+    "Elisabetta Dami"
+   ],
+   "addedAt": "2026-06-28T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Mondadori",
+   "pageCount": 249,
+   "language": "it",
+   "purchasePrice": 20,
+   "collectionIds": [
+    "demo-c5",
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b96",
+   "title": "Tea Stilton: Avventura a Parigi",
+   "authors": [
+    "Gianni Rodari"
+   ],
+   "addedAt": "2026-07-03T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Mondadori",
+   "pageCount": 220,
+   "language": "it",
+   "collectionIds": [
+    "demo-c3"
+   ]
+  },
+  {
+   "id": "demo-b97",
+   "title": "Il barone rampante (ed. ragazzi)",
+   "authors": [
+    "Elisabetta Dami"
+   ],
+   "addedAt": "2026-07-08T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Piemme",
+   "pageCount": 179,
+   "language": "it"
+  },
+  {
+   "id": "demo-b98",
+   "title": "Marcovaldo",
+   "authors": [
+    "Italo Calvino"
+   ],
+   "addedAt": "2026-07-13T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Mondadori",
+   "pageCount": 225,
+   "language": "it",
+   "collectionIds": [
+    "demo-c3",
+    "demo-c2"
+   ]
+  },
+  {
+   "id": "demo-b99",
+   "title": "Storie per gioco",
+   "authors": [
+    "Italo Calvino"
+   ],
+   "addedAt": "2026-07-18T12:00:00.000Z",
+   "source": "manual",
+   "publisher": "Einaudi Ragazzi",
+   "pageCount": 189,
+   "language": "it",
+   "collectionIds": [
+    "demo-c4"
+   ]
+  }
+ ],
+ "readings": [
+  {
+   "id": "demo-r0",
+   "bookId": "demo-b0",
+   "readerId": "demo-luna",
+   "startedAt": "2025-03-20T12:00:00.000Z",
+   "finishedAt": "2025-03-26T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r1",
+   "bookId": "demo-b1",
+   "readerId": "demo-luna",
+   "startedAt": "2025-04-01T12:00:00.000Z",
+   "finishedAt": "2025-04-07T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r2",
+   "bookId": "demo-b2",
+   "readerId": "demo-luna",
+   "startedAt": "2025-04-13T12:00:00.000Z",
+   "finishedAt": "2025-04-19T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r3",
+   "bookId": "demo-b3",
+   "readerId": "demo-luna",
+   "startedAt": "2025-04-25T12:00:00.000Z",
+   "finishedAt": "2025-05-01T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r4",
+   "bookId": "demo-b4",
+   "readerId": "demo-luna",
+   "startedAt": "2025-05-07T12:00:00.000Z",
+   "finishedAt": "2025-05-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r5",
+   "bookId": "demo-b5",
+   "readerId": "demo-luna",
+   "startedAt": "2025-05-19T12:00:00.000Z",
+   "finishedAt": "2025-05-25T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r6",
+   "bookId": "demo-b6",
+   "readerId": "demo-luna",
+   "startedAt": "2025-05-31T12:00:00.000Z",
+   "finishedAt": "2025-06-06T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r7",
+   "bookId": "demo-b7",
+   "readerId": "demo-luna",
+   "startedAt": "2025-06-12T12:00:00.000Z",
+   "finishedAt": "2025-06-18T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r8",
+   "bookId": "demo-b8",
+   "readerId": "demo-luna",
+   "startedAt": "2025-06-24T12:00:00.000Z",
+   "finishedAt": "2025-06-30T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r9",
+   "bookId": "demo-b9",
+   "readerId": "demo-luna",
+   "startedAt": "2025-07-06T12:00:00.000Z",
+   "finishedAt": "2025-07-12T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r10",
+   "bookId": "demo-b10",
+   "readerId": "demo-luna",
+   "startedAt": "2025-07-18T12:00:00.000Z",
+   "finishedAt": "2025-07-24T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r11",
+   "bookId": "demo-b11",
+   "readerId": "demo-luna",
+   "startedAt": "2025-07-30T12:00:00.000Z",
+   "finishedAt": "2025-08-05T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r12",
+   "bookId": "demo-b12",
+   "readerId": "demo-luna",
+   "startedAt": "2025-08-11T12:00:00.000Z",
+   "finishedAt": "2025-08-17T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r13",
+   "bookId": "demo-b21",
+   "readerId": "demo-luna",
+   "startedAt": "2025-08-23T12:00:00.000Z",
+   "finishedAt": "2025-08-29T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r14",
+   "bookId": "demo-b22",
+   "readerId": "demo-luna",
+   "startedAt": "2025-09-04T12:00:00.000Z",
+   "finishedAt": "2025-09-10T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r15",
+   "bookId": "demo-b23",
+   "readerId": "demo-luna",
+   "startedAt": "2025-09-16T12:00:00.000Z",
+   "finishedAt": "2025-09-22T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r16",
+   "bookId": "demo-b24",
+   "readerId": "demo-luna",
+   "startedAt": "2025-09-28T12:00:00.000Z",
+   "finishedAt": "2025-10-04T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r17",
+   "bookId": "demo-b25",
+   "readerId": "demo-luna",
+   "startedAt": "2025-10-10T12:00:00.000Z",
+   "finishedAt": "2025-10-16T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r18",
+   "bookId": "demo-b26",
+   "readerId": "demo-luna",
+   "startedAt": "2025-10-22T12:00:00.000Z",
+   "finishedAt": "2025-10-28T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r19",
+   "bookId": "demo-b27",
+   "readerId": "demo-luna",
+   "startedAt": "2025-11-03T12:00:00.000Z",
+   "finishedAt": "2025-11-09T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r20",
+   "bookId": "demo-b28",
+   "readerId": "demo-luna",
+   "startedAt": "2025-11-15T12:00:00.000Z",
+   "finishedAt": "2025-11-21T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r21",
+   "bookId": "demo-b29",
+   "readerId": "demo-luna",
+   "startedAt": "2025-11-27T12:00:00.000Z",
+   "finishedAt": "2025-12-03T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r22",
+   "bookId": "demo-b30",
+   "readerId": "demo-luna",
+   "startedAt": "2025-12-09T12:00:00.000Z",
+   "finishedAt": "2025-12-15T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r23",
+   "bookId": "demo-b31",
+   "readerId": "demo-luna",
+   "startedAt": "2025-12-21T12:00:00.000Z",
+   "finishedAt": "2025-12-27T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r24",
+   "bookId": "demo-b32",
+   "readerId": "demo-luna",
+   "startedAt": "2026-01-02T12:00:00.000Z",
+   "finishedAt": "2026-01-08T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r25",
+   "bookId": "demo-b33",
+   "readerId": "demo-luna",
+   "startedAt": "2026-01-14T12:00:00.000Z",
+   "finishedAt": "2026-01-20T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r26",
+   "bookId": "demo-b34",
+   "readerId": "demo-luna",
+   "startedAt": "2026-01-26T12:00:00.000Z",
+   "finishedAt": "2026-02-01T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r27",
+   "bookId": "demo-b35",
+   "readerId": "demo-luna",
+   "startedAt": "2026-02-07T12:00:00.000Z",
+   "finishedAt": "2026-02-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r28",
+   "bookId": "demo-b36",
+   "readerId": "demo-luna",
+   "startedAt": "2026-02-19T12:00:00.000Z",
+   "finishedAt": "2026-02-25T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r29",
+   "bookId": "demo-b37",
+   "readerId": "demo-luna",
+   "startedAt": "2026-03-03T12:00:00.000Z",
+   "finishedAt": "2026-03-09T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r30",
+   "bookId": "demo-b38",
+   "readerId": "demo-luna",
+   "startedAt": "2026-03-15T12:00:00.000Z",
+   "finishedAt": "2026-03-21T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r31",
+   "bookId": "demo-b39",
+   "readerId": "demo-luna",
+   "startedAt": "2026-03-27T12:00:00.000Z",
+   "finishedAt": "2026-04-02T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r32",
+   "bookId": "demo-b40",
+   "readerId": "demo-luna",
+   "startedAt": "2026-04-08T12:00:00.000Z",
+   "finishedAt": "2026-04-14T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r33",
+   "bookId": "demo-b41",
+   "readerId": "demo-luna",
+   "startedAt": "2026-04-20T12:00:00.000Z",
+   "finishedAt": "2026-04-26T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r34",
+   "bookId": "demo-b42",
+   "readerId": "demo-luna",
+   "startedAt": "2026-09-15T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r35",
+   "bookId": "demo-b43",
+   "readerId": "demo-luna",
+   "startedAt": "2026-09-16T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r36",
+   "bookId": "demo-b0",
+   "readerId": "demo-luna",
+   "startedAt": "2026-04-14T12:00:00.000Z",
+   "finishedAt": "2026-04-18T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r37",
+   "bookId": "demo-b3",
+   "readerId": "demo-luna",
+   "startedAt": "2026-05-14T12:00:00.000Z",
+   "finishedAt": "2026-05-21T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r38",
+   "bookId": "demo-b5",
+   "readerId": "demo-mama",
+   "startedAt": "2025-03-30T12:00:00.000Z",
+   "finishedAt": "2025-04-17T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r39",
+   "bookId": "demo-b6",
+   "readerId": "demo-mama",
+   "startedAt": "2025-04-29T12:00:00.000Z",
+   "finishedAt": "2025-05-17T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r40",
+   "bookId": "demo-b7",
+   "readerId": "demo-mama",
+   "startedAt": "2025-05-29T12:00:00.000Z",
+   "finishedAt": "2025-06-16T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r41",
+   "bookId": "demo-b8",
+   "readerId": "demo-mama",
+   "startedAt": "2025-06-28T12:00:00.000Z",
+   "finishedAt": "2025-07-16T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r42",
+   "bookId": "demo-b41",
+   "readerId": "demo-mama",
+   "startedAt": "2025-07-28T12:00:00.000Z",
+   "finishedAt": "2025-08-15T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r43",
+   "bookId": "demo-b9",
+   "readerId": "demo-mama",
+   "startedAt": "2025-08-27T12:00:00.000Z",
+   "finishedAt": "2025-09-14T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r44",
+   "bookId": "demo-b10",
+   "readerId": "demo-mama",
+   "startedAt": "2025-09-26T12:00:00.000Z",
+   "finishedAt": "2025-10-14T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r45",
+   "bookId": "demo-b11",
+   "readerId": "demo-mama",
+   "startedAt": "2025-10-26T12:00:00.000Z",
+   "finishedAt": "2025-11-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r46",
+   "bookId": "demo-b12",
+   "readerId": "demo-mama",
+   "startedAt": "2025-11-25T12:00:00.000Z",
+   "finishedAt": "2025-12-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r47",
+   "bookId": "demo-b38",
+   "readerId": "demo-mama",
+   "startedAt": "2025-12-25T12:00:00.000Z",
+   "finishedAt": "2026-01-12T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r48",
+   "bookId": "demo-b39",
+   "readerId": "demo-mama",
+   "startedAt": "2026-01-24T12:00:00.000Z",
+   "finishedAt": "2026-02-11T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r49",
+   "bookId": "demo-b40",
+   "readerId": "demo-mama",
+   "startedAt": "2026-02-23T12:00:00.000Z",
+   "finishedAt": "2026-03-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r50",
+   "bookId": "demo-b13",
+   "readerId": "demo-mama",
+   "startedAt": "2026-08-22T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r51",
+   "bookId": "demo-b18",
+   "readerId": "demo-papa",
+   "startedAt": "2025-05-09T12:00:00.000Z",
+   "finishedAt": "2025-06-03T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r52",
+   "bookId": "demo-b19",
+   "readerId": "demo-papa",
+   "startedAt": "2025-08-07T12:00:00.000Z",
+   "finishedAt": "2025-09-01T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r53",
+   "bookId": "demo-b20",
+   "readerId": "demo-papa",
+   "startedAt": "2025-11-05T12:00:00.000Z",
+   "finishedAt": "2025-11-30T12:00:00.000Z"
+  },
+  {
+   "id": "demo-r54",
+   "bookId": "demo-b91",
+   "readerId": "demo-papa",
+   "startedAt": "2026-02-03T12:00:00.000Z",
+   "finishedAt": "2026-02-28T12:00:00.000Z"
+  }
+ ],
+ "collections": [
+  {
+   "id": "demo-c1",
+   "name": "Histoires du soir",
+   "emoji": "😴",
+   "createdAt": "2025-03-12T12:00:00.000Z"
+  },
+  {
+   "id": "demo-c2",
+   "name": "Pour rire",
+   "emoji": "😂",
+   "createdAt": "2025-03-13T12:00:00.000Z"
+  },
+  {
+   "id": "demo-c3",
+   "name": "Aventure",
+   "emoji": "🤠",
+   "createdAt": "2025-03-14T12:00:00.000Z"
+  },
+  {
+   "id": "demo-c4",
+   "name": "Mystères",
+   "emoji": "🥸",
+   "createdAt": "2025-03-15T12:00:00.000Z"
+  },
+  {
+   "id": "demo-c5",
+   "name": "Coups de cœur",
+   "emoji": "🤩",
+   "createdAt": "2025-03-16T12:00:00.000Z"
+  }
+ ],
+ "earnedBadges": [
+  {
+   "id": "demo-e0",
+   "badgeId": "first-book",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-07-03T12:00:00.000Z",
+   "label": "First Book",
+   "emoji": "🌱"
+  },
+  {
+   "id": "demo-e1",
+   "badgeId": "five-books",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-07-18T12:00:00.000Z",
+   "label": "Five Books",
+   "emoji": "🖐️"
+  },
+  {
+   "id": "demo-e2",
+   "badgeId": "ten-books",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-08-02T12:00:00.000Z",
+   "label": "Ten Books",
+   "emoji": "🔟"
+  },
+  {
+   "id": "demo-e3",
+   "badgeId": "twenty-books",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-08-17T12:00:00.000Z",
+   "label": "Twenty Books",
+   "emoji": "🏆"
+  },
+  {
+   "id": "demo-e4",
+   "badgeId": "cataloguer",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-09-01T12:00:00.000Z",
+   "label": "Cataloguer",
+   "emoji": "🗂️"
+  },
+  {
+   "id": "demo-e5",
+   "badgeId": "five-authors",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-09-16T12:00:00.000Z",
+   "label": "Five Authors",
+   "emoji": "👥"
+  },
+  {
+   "id": "demo-e6",
+   "badgeId": "two-tongues",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-10-01T12:00:00.000Z",
+   "label": "Two Tongues",
+   "emoji": "🗣️"
+  },
+  {
+   "id": "demo-e7",
+   "badgeId": "polyglot",
+   "readerId": "demo-luna",
+   "earnedAt": "2025-10-16T12:00:00.000Z",
+   "label": "Polyglot",
+   "emoji": "🌍"
+  },
+  {
+   "id": "demo-e8",
+   "badgeId": "first-book",
+   "readerId": "demo-mama",
+   "earnedAt": "2025-10-31T12:00:00.000Z",
+   "label": "First Book",
+   "emoji": "🌱"
+  },
+  {
+   "id": "demo-e9",
+   "badgeId": "five-books",
+   "readerId": "demo-mama",
+   "earnedAt": "2025-11-15T12:00:00.000Z",
+   "label": "Five Books",
+   "emoji": "🖐️"
+  },
+  {
+   "id": "demo-e10",
+   "badgeId": "ten-books",
+   "readerId": "demo-mama",
+   "earnedAt": "2025-11-30T12:00:00.000Z",
+   "label": "Ten Books",
+   "emoji": "🔟"
+  },
+  {
+   "id": "demo-e11",
+   "badgeId": "cataloguer",
+   "readerId": "demo-mama",
+   "earnedAt": "2025-12-15T12:00:00.000Z",
+   "label": "Cataloguer",
+   "emoji": "🗂️"
+  },
+  {
+   "id": "demo-e12",
+   "badgeId": "five-authors",
+   "readerId": "demo-mama",
+   "earnedAt": "2025-12-30T12:00:00.000Z",
+   "label": "Five Authors",
+   "emoji": "👥"
+  },
+  {
+   "id": "demo-e13",
+   "badgeId": "two-tongues",
+   "readerId": "demo-mama",
+   "earnedAt": "2026-01-14T12:00:00.000Z",
+   "label": "Two Tongues",
+   "emoji": "🗣️"
+  },
+  {
+   "id": "demo-e14",
+   "badgeId": "polyglot",
+   "readerId": "demo-mama",
+   "earnedAt": "2026-01-29T12:00:00.000Z",
+   "label": "Polyglot",
+   "emoji": "🌍"
+  },
+  {
+   "id": "demo-e15",
+   "badgeId": "first-book",
+   "readerId": "demo-papa",
+   "earnedAt": "2026-02-13T12:00:00.000Z",
+   "label": "First Book",
+   "emoji": "🌱"
+  },
+  {
+   "id": "demo-e16",
+   "badgeId": "cataloguer",
+   "readerId": "demo-papa",
+   "earnedAt": "2026-02-28T12:00:00.000Z",
+   "label": "Cataloguer",
+   "emoji": "🗂️"
+  }
+ ],
+ "pendingLookups": [],
+ "settings": {
+  "activeReaderId": "demo-luna",
+  "lookupEnabled": true
+ }
+}
