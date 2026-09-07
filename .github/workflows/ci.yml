@@ -2,8 +2,12 @@
 # requires this, which is what makes "merge to main = release" safe to automate.
 name: ci
 on:
+  # A pull request, and the merge itself. Deliberately not `branches: ['**']`, which ran
+  # this twice for every pull request — once for the branch push and once for the PR — for
+  # no extra signal, since both were checking the same commit. The cost of narrowing it is
+  # that a branch pushed with no PR open gets no CI; opening the PR first removes that.
   push:
-    branches: ['**']
+    branches: [main]
   pull_request:
 
 jobs:
