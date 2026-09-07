@@ -162,3 +162,23 @@ Two generated files exist twice, and both copies come from the generators: `mark
 The rasters (favicon.ico, apple-touch-icon.png, the PNG manifest icons in `static/icons/`) are rendered from the source SVGs with WebKit via `qlmanage`, then sized with ImageMagick. Not with ImageMagick's own SVG renderer, which silently drops the mark and produces a flat indigo square; pixel-sample the output before trusting any regeneration.
 
 Judge the result at 32 px and circle-cropped before deciding it works.
+
+## The social card (og-image.png)
+
+1200x630, indigo ground, the lockup recoloured white, tagline beneath: the same
+composition Graftful uses, in coruja's colour. WhatsApp and every other unfurler
+reads it from `og:image` with `twitter:card: summary_large_image`.
+
+Two traps its build stepped on, recorded so the next regeneration does not:
+
+- **The mark is stroke-drawn.** Recolouring `fill="#4b3f9e"` turns the wordmark
+  white and silently loses the owl, whose eye rings are `stroke=`. Both attributes
+  must be recoloured.
+- **qlmanage mis-frames non-square canvases.** The card is rendered by headless
+  Chromium (playwright-core, dev-only) screenshotting a 1200x630 HTML page instead:
+  deterministic, and the same engine browsers use. The tagline is live text
+  (Avenir Next, visually adjacent to Quicksand) because outlining one line of
+  caption text is not worth a font pipeline; the lockup itself stays outlined paths.
+
+The PNG is a committed artifact, like the icons. Regenerate by hand when the lockup
+or tagline changes; the recipe is this section.
