@@ -5,9 +5,12 @@ Static output on Cloudflare Pages, deployed from GitHub. Merges to `main` go liv
 ## The flow
 
 ```
-branch push  ->  GitHub Actions ci  ->  Cloudflare Pages preview  <branch>.coruja.pages.dev
+branch push  ->  Cloudflare Pages preview  <branch>.coruja.pages.dev
+pull request ->  GitHub Actions ci  +  Pages preview link commented on the PR
 merge to main -> GitHub Actions ci  ->  Cloudflare Pages production  coruja.app
 ```
+
+Note what is deliberately absent from the first line: **a branch push runs no CI.** `ci.yml` triggers on `pull_request` and on pushes to `main` only. It used to trigger on every branch too, which ran the whole gate twice for every pull request — once for the branch push, once for the PR — against the same commit, for no extra signal. The cost of narrowing it is that a branch pushed with no PR open gets no CI; opening the PR first removes that.
 
 Previews are native Cloudflare Pages behaviour, not something we build: with the Git integration, every push to a non-production branch deploys to `<branch>.<project>.pages.dev` and every PR gets its preview link as a comment. Production deploys only from `main`.
 
