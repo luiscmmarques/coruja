@@ -5,7 +5,7 @@
  *
  * Nothing else in coruja talks to the internet — no analytics, no beacon, no fonts from a CDN. That is not a convention, it is enforced: `connect-src` in vite.config.ts pins exactly the origins used below, and the browser blocks the rest. **Adding a provider means editing both files**, and the CSP is the half that is easy to forget, because everything works in `vite dev` and fails in the built app.
  *
- * The privacy cost is stated plainly in PLAN.md: a lookup tells the provider "someone at this address looked up this book". It cannot be reduced to zero without giving up auto-fill, so it is disclosed, `settings.lookupEnabled` switches it off, and the manual path stays fully functional. Google Books raises that cost — Google is not a non-profit — which is why it is a separate, off-by-default opt-in (`settings.googleBooksEnabled`), asked only when Open Library falls short.
+ * The privacy cost is stated plainly in PLAN.md: a lookup tells the provider "someone at this address looked up this book". It cannot be reduced to zero without giving up auto-fill, so it is disclosed, `settings.lookupEnabled` switches it off, and the manual path stays fully functional. Google Books raises that cost — Google is not a non-profit — which is why it keeps its own switch (`settings.googleBooksEnabled`, on by default like `lookupEnabled`, off on its own), and is asked only when Open Library falls short.
  *
  * ## Framework-free, database-free
  *
@@ -286,6 +286,12 @@ function dropEmptyAuthors(metadata: BookMetadata): BookMetadata {
  *
  * One request answers everything, including the language as a plain ISO tag — no MARC table. The `q=isbn:` query can return several loosely related volumes (verified live: two items for one ISBN), so the volume is chosen by its own ISBN-13 identifier, falling back to the first item only when none carries it, because some records list only an `OTHER` identifier.
  */
+/**
+ * Partial-response projection (Google's `fields` parameter): exactly the fields the mapping below reads, nothing else. The full volume record is ~3 KB of description, sale info and access flags per item; this trims the transfer to a fraction and is Google's own recommended etiquette for read-heavy clients.
+ */
+const GOOGLE_FIELDS =
+	'items(volumeInfo(title,authors,publisher,publishedDate,pageCount,language,industryIdentifiers,imageLinks))';
+
 export async function fromGoogleBooks(
 	isbn13: string,
 	apiKey: string,
@@ -293,6 +299,7 @@ export async function fromGoogleBooks(
 ): Promise<BookMetadata | null> {
 	const url =
 		`https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(`isbn:${isbn13}`)}` +
+		`&fields=${encodeURIComponent(GOOGLE_FIELDS)}` +
 		`&key=${encodeURIComponent(apiKey)}`;
 	const items = asArray(asRecord(await getJson(url, fetchFn)).items).map(asRecord);
 	const chosen = items.find((item) => claimsIsbn(item, isbn13)) ?? items[0];
@@ -353,18 +360,28 @@ export interface LookupOptions {
 }
 
 /**
- * Fields Google may fill when Open Library leaves them empty. `title` is absent on purpose — no title means no record at all (`isUseful`) — and `coverUrl` because Open Library always constructs one for a book it knows.
+ * Fields Google may fill when Open Library leaves them empty. `title` is absent on purpose — no title means no record at all (`isUseful`). The cover is handled apart: Open Library always *constructs* a URL for a book it knows, and a construction is a guess, not a cover — see `isConstructedCover`.
  */
 const GAP_FIELDS = ['authors', 'publisher', 'pageCount', 'language', 'publishedYear'] as const;
 
+/**
+ * True when the URL is one this module built as a guess rather than one the provider attested. Only the constructed forms carry `?default=false` — put there precisely so a miss is a 404 — which makes the marker reliable. The distinction matters in the merge: a guess 404s exactly for the books Open Library has no image of, which are the books Google was asked about (a QA scan surfaced this: record found, cover guessed, guess 404ed, real Google thumbnail ignored).
+ */
+function isConstructedCover(url: string | undefined): boolean {
+	return url !== undefined && url.endsWith('?default=false');
+}
+
 function hasGaps(metadata: BookMetadata): boolean {
-	return GAP_FIELDS.some((field) => metadata[field] === undefined);
+	return (
+		GAP_FIELDS.some((field) => metadata[field] === undefined) ||
+		isConstructedCover(metadata.coverUrl)
+	);
 }
 
 /**
  * Metadata for `isbn13`, or `null` when no provider knows it.
  *
- * Open Library answers first. Google Books — when a key is configured *and* the household opted in — is asked only when Open Library drew a blank or left gaps, and only ever fills fields in: on any field both providers answer, Open Library wins, and `editedByHand` (enforced in the db layer) beats them both. A pleasant side effect: a book Open Library genuinely does not know used to burn all eight backoff retries against it; Google settling it on the first attempt makes those retries disappear.
+ * Open Library answers first. Google Books — when a key is configured and its Setup switch left on — is asked only when Open Library drew a blank or left gaps, and only ever fills fields in: on any field both providers answer, Open Library wins, and `editedByHand` (enforced in the db layer) beats them both. A pleasant side effect: a book Open Library genuinely does not know used to burn all eight backoff retries against it; Google settling it on the first attempt makes those retries disappear.
  */
 export async function fetchBookMetadata(
 	isbn13: string,
@@ -381,5 +398,8 @@ export async function fetchBookMetadata(
 	if (!primary) return filler;
 	if (!filler) return primary;
 	// Spread order is the precedence: Google underneath, Open Library on top. Both sides are compacted, so an absent field cannot shadow a real value with `undefined`.
-	return { ...filler, ...primary };
+	const merged = { ...filler, ...primary };
+	// One exception to Open-Library-wins: a cover Google attested beats a URL we merely guessed, because the guess 404s for exactly the books that reached this branch.
+	if (filler.coverUrl && isConstructedCover(primary.coverUrl)) merged.coverUrl = filler.coverUrl;
+	return merged;
 }

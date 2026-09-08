@@ -170,7 +170,7 @@ export const de: Messages = {
 		lookupOff: 'Aus. Ich trage die Details selbst ein',
 		googleLookup: 'Auch Google Books fragen, wenn Open Library nicht weiterweiß',
 		googleLookupExplain:
-			'Aus, solange du es nicht einschaltest. Wenn Open Library ein Buch nicht kennt oder Details offenlässt, wird dieselbe Nummer auch an Google Books geschickt, um die Lücken zu füllen. Die Datenschutzseite sagt genau, was das bedeutet.',
+			'Von Anfang an eingeschaltet, und du kannst es abschalten. Wenn Open Library ein Buch nicht kennt oder Details offenlässt, wird dieselbe Nummer auch an Google Books geschickt, um die Lücken zu füllen. Die Datenschutzseite sagt genau, was das bedeutet.',
 
 		backupTitle: 'Sicherung',
 		backupExplain:
@@ -249,7 +249,7 @@ export const de: Messages = {
 		switchOffBody:
 			'In den Einstellungen gibt es einen Schalter, und wenn er aus ist, wird überhaupt keine Anfrage gestellt. Die App bleibt vollständig brauchbar: du tippst Titel, Autor und Seitenzahl selbst ein, und ein so hinzugefügtes Buch zählt genau wie jedes andere. Es bringt sogar ein Abzeichen.',
 		googleOptIn:
-			'Es gibt eine zweite Quelle, die du dazuschalten kannst: Google Books. Sie ist aus, solange du sie in den Einstellungen nicht einschaltest. Ist sie an, wird bei einem Buch, das Open Library nicht kennt — oder nur halb —, dieselbe Nummer auch an Google geschickt, um die Lücken zu füllen. Mehr geht nicht mit, aber Google ist ein Unternehmen und keine gemeinnützige Organisation, und genau dieser Unterschied ist der Grund, warum das ein eigener Schalter ist und nicht Teil des ersten.',
+			'Eine zweite Quelle hilft bei den Büchern, die Open Library kaum kennt: Google Books. Wenn Open Library ein Buch nicht kennt — oder nur halb —, wird dieselbe Nummer auch an Google geschickt, um die Lücken zu füllen. Mehr geht nicht mit, aber Google ist ein Unternehmen und keine gemeinnützige Organisation, und deshalb hat es in den Einstellungen einen eigenen Schalter, getrennt vom ersten.',
 		covers:
 			'Ein Cover wird einmal geholt und dann in der Datenbank hier behalten, damit sich das Regal auch ohne Verbindung zeichnet und dasselbe Cover nie zweimal angefragt wird. Das Bild selbst kommt von den Servern des Internet Archive, derselben gemeinnützigen Organisation, die Open Library betreibt.',
 		backupsTitle: 'Deine Sicherungen gehören dir',

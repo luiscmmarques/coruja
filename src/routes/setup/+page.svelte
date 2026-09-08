@@ -109,8 +109,8 @@
 		await saveSettings({ lookupEnabled: enabled });
 	}
 
-	/** Absent means off: asking Google is opted into, never inherited. */
-	const googleEnabled = $derived(settings?.googleBooksEnabled === true);
+	/** Absent means on, like the main switch: the second source has its own off. */
+	const googleEnabled = $derived(settings?.googleBooksEnabled !== false);
 
 	async function chooseGoogle(event: Event) {
 		await saveSettings({
@@ -385,7 +385,7 @@
 		</label>
 	</div>
 	{#if googleBooksAvailable && lookupEnabled}
-		<!-- Opt-in, never inherited from the main switch: Open Library is a non-profit and the privacy page leans on that, so asking Google is its own decision. Hidden entirely in a build without a key — a toggle that does nothing would be dishonest. -->
+		<!-- On by default like the main switch, but its own switch all the same: Open Library is a non-profit and the privacy page leans on that, so the second source can be turned off alone. Hidden entirely in a build without a key — a toggle that does nothing would be dishonest. -->
 		<label class="choice google">
 			<input type="checkbox" name="google-lookup" checked={googleEnabled} onchange={chooseGoogle} />
 			{$t.setup.googleLookup}

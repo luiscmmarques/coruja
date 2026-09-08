@@ -38,10 +38,10 @@ const GOOGLE_BOOKS_KEY: string = import.meta.env.VITE_GOOGLE_BOOKS_KEY ?? '';
 export const googleBooksAvailable = GOOGLE_BOOKS_KEY !== '';
 
 /**
- * The key, gated by consent: `googleBooksEnabled` is opt-in (absent means off), the reverse of `lookupEnabled` — the privacy page's claims lean on Open Library being a non-profit, so asking Google is a separate decision.
+ * The key, gated by the per-source switch: `googleBooksEnabled` absent means on, the same convention as `lookupEnabled` — the household consented to lookups as such, and PLAN.md records why the second source rides on that consent. The dedicated off switch in Setup is what keeps it a real choice.
  */
 function googleBooksKeyFor(settings: Settings): string | undefined {
-	return settings.googleBooksEnabled === true && GOOGLE_BOOKS_KEY !== ''
+	return settings.googleBooksEnabled !== false && GOOGLE_BOOKS_KEY !== ''
 		? GOOGLE_BOOKS_KEY
 		: undefined;
 }

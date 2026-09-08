@@ -168,7 +168,7 @@ export const fr: Messages = {
 		lookupOff: 'Désactivée. Je saisis les détails moi-même',
 		googleLookup: 'Demander aussi à Google Books quand Open Library ne suffit pas',
 		googleLookupExplain:
-			'Désactivé tant que tu ne l’actives pas. Quand Open Library ne connaît pas un livre, ou laisse des détails vides, le même numéro est aussi envoyé à Google Books pour combler les manques. La page Confidentialité dit exactement ce que cela veut dire.',
+			'Activé au départ, et à toi de le désactiver. Quand Open Library ne connaît pas un livre, ou laisse des détails vides, le même numéro est aussi envoyé à Google Books pour combler les manques. La page Confidentialité dit exactement ce que cela veut dire.',
 
 		backupTitle: 'Sauvegarde',
 		backupExplain:
@@ -247,7 +247,7 @@ export const fr: Messages = {
 		switchOffBody:
 			'Il y a un interrupteur dans les Réglages, et lorsqu’il est éteint aucune requête n’est faite du tout. L’application reste tout à fait utilisable : vous saisissez vous-même le titre, l’auteur et le nombre de pages, et un livre ajouté ainsi compte exactement comme les autres. Il fait même gagner un badge.',
 		googleOptIn:
-			'Il existe une seconde source que vous pouvez choisir d’ajouter : Google Books. Elle est désactivée tant que vous ne l’activez pas dans les Réglages. Une fois activée, pour un livre qu’Open Library ne connaît pas — ou ne connaît qu’à moitié — le même numéro est aussi envoyé à Google pour combler les manques. Rien d’autre ne l’accompagne, mais Google est une entreprise, pas une organisation à but non lucratif, et cette différence est la raison pour laquelle c’est un interrupteur séparé plutôt qu’une partie du premier.',
+			'Une seconde source aide pour les livres qu’Open Library couvre mal : Google Books. Quand Open Library ne connaît pas un livre — ou ne le connaît qu’à moitié — le même numéro est aussi envoyé à Google pour combler les manques. Rien d’autre ne l’accompagne, mais Google est une entreprise, pas une organisation à but non lucratif, et c’est pourquoi il a son propre interrupteur dans les Réglages, séparé du premier.',
 		covers:
 			'Une couverture est récupérée une fois puis conservée dans la base de données locale, si bien que l’étagère se dessine encore sans connexion et que la même couverture n’est jamais demandée deux fois. L’image elle-même vient des serveurs de l’Internet Archive, la même organisation à but non lucratif qui gère Open Library.',
 		backupsTitle: 'Vos sauvegardes sont à vous',

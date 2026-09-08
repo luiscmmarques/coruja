@@ -229,7 +229,7 @@ export interface Settings {
 	 */
 	lookupEnabled?: boolean;
 	/**
-	 * Whether a lookup may also ask Google Books when Open Library falls short. Off by default and meaningful only when a build carries an API key: Open Library is a non-profit and the privacy page leans on that, so sending the ISBN to Google is a separate, explicit opt-in rather than part of `lookupEnabled`.
+	 * Whether a lookup may also ask Google Books when Open Library falls short. Absent means on, the same convention as `lookupEnabled`, and meaningful only when a build carries an API key. It keeps its own switch rather than riding silently on `lookupEnabled`: Open Library is a non-profit and the privacy page leans on that, so the second source is named plainly and can be turned off alone.
 	 */
 	googleBooksEnabled?: boolean;
 	/**

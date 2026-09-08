@@ -170,7 +170,7 @@ export const it: Messages = {
 		lookupOff: 'Disattivata. I dettagli li scrivo io',
 		googleLookup: 'Chiedi anche a Google Books quando Open Library non basta',
 		googleLookupExplain:
-			'Spento finché non lo accendi tu. Quando Open Library non conosce un libro, o lascia dei dettagli vuoti, lo stesso numero viene inviato anche a Google Books per colmare le lacune. La pagina della privacy dice esattamente cosa significa.',
+			'Acceso dall’inizio, e sei tu a poterlo spegnere. Quando Open Library non conosce un libro, o lascia dei dettagli vuoti, lo stesso numero viene inviato anche a Google Books per colmare le lacune. La pagina della privacy dice esattamente cosa significa.',
 
 		backupTitle: 'Backup',
 		backupExplain:
@@ -249,7 +249,7 @@ export const it: Messages = {
 		switchOffBody:
 			'C’è un interruttore nelle Impostazioni, e con quello spento non parte nessuna richiesta. L’app resta perfettamente utilizzabile: titolo, autore e numero di pagine li scrivi tu, e un libro aggiunto così conta esattamente come tutti gli altri. Fa conquistare anche un badge.',
 		googleOptIn:
-			'C’è una seconda fonte che puoi scegliere di aggiungere: Google Books. È spenta finché non la accendi nelle Impostazioni. Con quella accesa, per un libro che Open Library non conosce — o conosce solo a metà — lo stesso numero viene inviato anche a Google per colmare le lacune. Non lo accompagna nient’altro, ma Google è un’azienda, non un ente senza scopo di lucro, ed è proprio questa differenza il motivo per cui è un interruttore separato invece che parte del primo.',
+			'Una seconda fonte aiuta con i libri che Open Library conosce poco: Google Books. Quando Open Library non conosce un libro — o lo conosce solo a metà — lo stesso numero viene inviato anche a Google per colmare le lacune. Non lo accompagna nient’altro, ma Google è un’azienda, non un ente senza scopo di lucro, ed è per questo che ha il suo interruttore nelle Impostazioni, separato dal primo.',
 		covers:
 			'Una copertina viene scaricata una volta sola e poi conservata nel database locale, così lo scaffale si disegna anche senza connessione e la stessa copertina non viene mai chiesta due volte. L’immagine stessa arriva dai server dell’Internet Archive, la stessa organizzazione senza scopo di lucro che gestisce Open Library.',
 		backupsTitle: 'I tuoi backup sono tuoi',

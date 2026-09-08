@@ -280,7 +280,7 @@ test('paceDelay books one slot per second and never asks for a negative wait', (
 /* ---------------------------------------------------------------------- Google Books */
 
 test('Google maps the volume that claims the ISBN, not the first item', async () => {
-	const { fetchFn } = stubFetch([[GOOGLE_VOLUMES, () => json(googleVolumes)]]);
+	const { fetchFn, calls } = stubFetch([[GOOGLE_VOLUMES, () => json(googleVolumes)]]);
 	assert.deepEqual(await fromGoogleBooks(ISBN, GOOGLE_KEY, fetchFn), {
 		title: 'The Hobbit',
 		authors: ['J.R.R. Tolkien'],
@@ -291,6 +291,8 @@ test('Google maps the volume that claims the ISBN, not the first item', async ()
 		// The thumbnail arrives on http:// and is upgraded; connect-src only knows https.
 		coverUrl: 'https://books.google.com/books/content?id=abc&printsec=frontcover&img=1&zoom=1'
 	});
+	// The partial-response projection rides on every request: the full record is ~3 KB of description and sale info per item that nothing here reads.
+	assert.ok(calls[0].includes('fields='));
 });
 
 test('when no volume claims the ISBN, the first item is better than nothing', async () => {
@@ -400,6 +402,42 @@ test('Google fills the gaps Open Library left, and Open Library wins where both 
 			publishedYear: 2003,
 			language: 'en'
 		}
+	);
+	assert.deepEqual(calls.map(label), ['ol-data', 'ol-edition-key', 'google']);
+});
+
+test('a guessed cover is a gap: Google is asked, and its attested thumbnail wins', async () => {
+	// A record complete in every field Google could fill — except Open Library offered
+	// no cover, so the URL below is our constructed OLID guess. That guess 404s for
+	// exactly such books (QA found one: record known, image absent), so a thumbnail
+	// Google attests to is the better answer, and the one exception to OL-wins.
+	const coverless = {
+		[`ISBN:${ISBN}`]: {
+			title: 'The Hobbit (OL)',
+			key: OL_KEY,
+			authors: [{ name: 'J. R. R. Tolkien' }],
+			publishers: [{ name: 'Houghton Mifflin' }],
+			number_of_pages: 366,
+			publish_date: 'May 1, 2003'
+		}
+	};
+	const { fetchFn, calls } = stubFetch([
+		[OPEN_LIBRARY_DATA, () => json(coverless)],
+		[OPEN_LIBRARY_EDITION_KEY, () => json(openLibraryEditionRecord)],
+		[GOOGLE_VOLUMES, () => json(googleVolumes)]
+	]);
+	const metadata = await fetchBookMetadata(ISBN, {
+		fetchFn,
+		googleBooksKey: GOOGLE_KEY,
+		pace: instantly
+	});
+	// Every text field is still Open Library's…
+	assert.equal(metadata?.title, 'The Hobbit (OL)');
+	assert.equal(metadata?.publisher, 'Houghton Mifflin');
+	// …the constructed-cover gap alone was reason to ask Google, and its cover won.
+	assert.equal(
+		metadata?.coverUrl,
+		'https://books.google.com/books/content?id=abc&printsec=frontcover&img=1&zoom=1'
 	);
 	assert.deepEqual(calls.map(label), ['ol-data', 'ol-edition-key', 'google']);
 });

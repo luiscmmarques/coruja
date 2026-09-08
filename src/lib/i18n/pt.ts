@@ -172,7 +172,7 @@ export const pt: Messages = {
 		lookupOff: 'Desligada. Escrevo eu os detalhes',
 		googleLookup: 'Perguntar também ao Google Books quando o Open Library não chega',
 		googleLookupExplain:
-			'Desligado até o ligares. Quando o Open Library não conhece um livro, ou deixa detalhes em branco, o mesmo número é também enviado ao Google Books para preencher as falhas. A página de privacidade diz exatamente o que isso significa.',
+			'Ligado à partida, e és tu que o podes desligar. Quando o Open Library não conhece um livro, ou deixa detalhes em branco, o mesmo número é também enviado ao Google Books para preencher as falhas. A página de privacidade diz exatamente o que isso significa.',
 
 		backupTitle: 'Cópia de segurança',
 		backupExplain:
@@ -251,7 +251,7 @@ export const pt: Messages = {
 		switchOffBody:
 			'Há um interruptor nas Definições e, com ele desligado, não é feito pedido nenhum. A aplicação continua completamente utilizável: escreves tu o título, o autor e o número de páginas, e um livro acrescentado assim conta exatamente o mesmo que qualquer outro. Até dá uma medalha.',
 		googleOptIn:
-			'Há uma segunda fonte que podes escolher acrescentar: o Google Books. Está desligada até a ligares nas Definições. Com ela ligada, para um livro que o Open Library não conhece — ou conhece só a meias — o mesmo número é enviado também à Google para preencher as falhas. Nada mais vai com ele, mas a Google é uma empresa, não uma organização sem fins lucrativos, e é essa diferença que faz disto um interruptor separado em vez de parte do primeiro.',
+			'Uma segunda fonte ajuda com os livros que o Open Library mal conhece: o Google Books. Quando o Open Library não conhece um livro — ou conhece só a meias — o mesmo número é enviado também à Google para preencher as falhas. Nada mais vai com ele, mas a Google é uma empresa, não uma organização sem fins lucrativos, e é por isso que tem o seu próprio interruptor nas Definições, separado do primeiro.',
 		covers:
 			'Uma capa é buscada uma vez e fica depois guardada na base de dados local, para que a estante continue a desenhar-se sem ligação e a mesma capa nunca seja pedida duas vezes. A própria imagem vem dos servidores do Internet Archive, a mesma organização sem fins lucrativos que gere a Open Library.',
 		backupsTitle: 'As tuas cópias de segurança são tuas',
