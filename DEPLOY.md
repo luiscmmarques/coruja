@@ -14,6 +14,8 @@ Note what is deliberately absent from the first line: **a branch push runs no CI
 
 Previews are native Cloudflare Pages behaviour, not something we build: with the Git integration, every push to a non-production branch deploys to `<branch>.<project>.pages.dev` and every PR gets its preview link as a comment. Production deploys only from `main`.
 
+With Cloudflare Access protecting the preview URLs, one request needs special handling: the web app manifest. Browsers fetch it anonymously — no cookies — so Access answers with a redirect to its login page on `cloudflareaccess.com`, which the CSP blocks (`manifest-src` falls back to `default-src 'self'`). The manifest `<link>` in `src/app.html` therefore carries `crossorigin="use-credentials"`, which sends the Access session cookie along and costs nothing in production.
+
 ## One-time setup
 
 ### 1. GitHub repository
