@@ -44,8 +44,10 @@
 
 		<!--
 			The manifest, linked by hand: @vite-pwa/sveltekit generates the file but does not get its <link> into SvelteKit's prerendered HTML. Without this line the manifest is generated, precached, served — and the app still cannot be installed.
+
+			crossorigin="use-credentials" because manifest requests are anonymous by default — no cookies. On the Cloudflare-Access-protected preview deployments that anonymous request is answered with a redirect to the Access login on cloudflareaccess.com, which the CSP then blocks (manifest-src falls back to default-src 'self'). With credentials, the Access session cookie rides along and the manifest just loads. On production, a same-origin request with cookies that do not exist, i.e. nothing.
 		-->
-		<link rel="manifest" href="/manifest.webmanifest" />
+		<link rel="manifest" href="/manifest.webmanifest" crossorigin="use-credentials" />
 
 		%sveltekit.head%
 	</head>

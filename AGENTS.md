@@ -62,9 +62,9 @@ There is no Today screen: the shelf is the home, with the reader's ladder and op
 
 ## The network boundary
 
-The ISBN lookup (`src/lib/lookup.ts`) is the app's **only** network egress, and the CSP in `vite.config.ts` enforces it: `connect-src` pins exactly the Open Library origins. Adding any request means editing both files and updating the Privacy page — and the CSP is the half that is easy to forget, because everything works in `vite dev` and fails in the built app.
+The ISBN lookup (`src/lib/lookup.ts`) is the app's **only** network egress, and the CSP in `vite.config.ts` enforces it: `connect-src` pins exactly the two providers' origins. Adding any request means editing both files and updating the Privacy page — and the CSP is the half that is easy to forget, because everything works in `vite dev` and fails in the built app.
 
-Open Library is the only provider. Google Books was removed (keyless quota is zero); bring-your-own-API-key support is a v2 idea. `editedByHand` wins over any provider, always — a human correction may never be overwritten by a lookup, except the cover, which nobody typed.
+Open Library is primary and is used per its API guidelines: JSON requests are paced to 1/s by a module-level gate in `lookup.ts` (tests must inject a no-op `pace` or the suite sleeps), and covers are requested by OLID where the record supplies one, because ISBN-keyed cover requests are rate-limited (100/IP per 5 min). Google Books fills gaps only: it needs the build-time key (`VITE_GOOGLE_BOOKS_KEY`, one per environment, see DEPLOY.md — absent means the provider does not exist, which is what CI gets) **and** the per-source switch `settings.googleBooksEnabled` (absent means on, the `lookupEnabled` convention). Its referrer-restricted key rides on `_headers` sending `Referrer-Policy: strict-origin-when-cross-origin`; tighten that to `no-referrer` and every Google request answers 403. `editedByHand` wins over any provider, always — a human correction may never be overwritten by a lookup, except the cover, which nobody typed.
 
 ## Changing the data model
 

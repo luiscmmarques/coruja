@@ -154,6 +154,9 @@ export const en: Messages = {
 			'When you scan a book, its number is sent to a book database to fetch the title and cover. That request is the only thing that ever leaves this device.',
 		lookupOn: 'Look books up for me',
 		lookupOff: 'Off. I will type the details in myself',
+		googleLookup: 'Also ask Google Books when Open Library comes up short',
+		googleLookupExplain:
+			'On to start with, and yours to switch off. When Open Library does not know a book, or leaves details blank, the same number is also sent to Google Books to fill the gaps. The privacy page says exactly what that means.',
 
 		backupTitle: 'Backup',
 		backupExplain:
@@ -229,6 +232,8 @@ export const en: Messages = {
 		switchOffLead: 'You can switch it off.',
 		switchOffBody:
 			'There is a switch in Setup, and with it off no request is made at all. The app stays completely usable: you type the title, the author and the page count yourself, and a book added that way counts exactly the same as any other. It even earns a badge.',
+		googleOptIn:
+			'A second source helps with the books Open Library is thin on: Google Books. When Open Library does not know a book — or knows only half of it — the same number is also sent to Google to fill the gaps. Nothing else goes with it, but Google is a company, not a non-profit, which is why it has its own switch in Setup, separate from the first one.',
 		covers:
 			"A cover is fetched once and then kept in the local database, so the shelf still draws itself with no connection and the same cover is never asked for twice. The image itself comes from the Internet Archive's servers, the same non-profit that runs Open Library.",
 		backupsTitle: 'Your backups are yours',
@@ -241,7 +246,7 @@ export const en: Messages = {
 		childrenBody:
 			'This was written for a child to use. Nothing she does in it is collected, nothing is shared outward, there is no feed, no profile, no way to publish anything and no way for anyone to contact her through it.',
 		trademarks:
-			'Cloudflare is a trademark of Cloudflare, Inc. Open Library and Internet Archive are trademarks of the Internet Archive. Neither is affiliated with coruja; they are named because being exact about who sees what requires naming them.'
+			'Cloudflare is a trademark of Cloudflare, Inc. Open Library and Internet Archive are trademarks of the Internet Archive. Google Books is a trademark of Google LLC. None of them is affiliated with coruja; they are named because being exact about who sees what requires naming them.'
 	},
 	support: {
 		title: 'Support',

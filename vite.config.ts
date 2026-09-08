@@ -97,7 +97,7 @@ export default defineConfig({
 			/*
 			 * The CSP is generated here rather than hand-written in static/_headers, because SvelteKit's prerendered pages carry an inline bootstrap script whose content changes every build — only generated hashes can allow it. Emitted into a <meta> tag per page, which also means the policy is enforced under `vite preview` and therefore testable locally.
 			 *
-			 * `connect-src` lists the one lookup provider: the ISBN lookup is the only network request this app makes, and the policy is the enforcement of that claim — anything else attempting to phone home is blocked by the browser. (Google Books was removed as a fallback: its keyless quota is zero. A bring-your-own-key option is a v2 idea, and would mean re-adding its origins here.)
+			 * `connect-src` lists the two lookup providers: the ISBN lookup is the only network request this app makes, and the policy is the enforcement of that claim — anything else attempting to phone home is blocked by the browser. Open Library is primary; Google Books (returned in v1.1 with a referrer-restricted key, off by default in Setup) is the gap-filler, and its two origins are the JSON endpoint and the cover thumbnails.
 			 */
 			csp: {
 				mode: 'hash',
@@ -114,13 +114,18 @@ export default defineConfig({
 					 * ia600502.us.archive.org (verified live). Fetch redirects must satisfy
 					 * connect-src too, so without these two entries every cover download dies
 					 * at the first hop. Same non-profit; the privacy page says so.
+					 *
+					 * Google's thumbnails serve directly from books.google.com with no
+					 * redirect (verified live), so no wildcard sibling is needed there.
 					 */
 					'connect-src': [
 						'self',
 						'https://openlibrary.org',
 						'https://covers.openlibrary.org',
 						'https://archive.org',
-						'https://*.archive.org'
+						'https://*.archive.org',
+						'https://www.googleapis.com',
+						'https://books.google.com'
 					],
 					'style-src': ['self', 'unsafe-inline'],
 					'img-src': ['self', 'data:', 'blob:'],

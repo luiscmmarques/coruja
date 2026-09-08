@@ -179,6 +179,9 @@ export interface Messages {
 		lookupExplain: string;
 		lookupOn: string;
 		lookupOff: string;
+		/** The Google Books switch, on by default. Only rendered when the build carries an API key. */
+		googleLookup: string;
+		googleLookupExplain: string;
 
 		backupTitle: string;
 		backupExplain: string;
@@ -246,6 +249,8 @@ export interface Messages {
 		exception2: string;
 		switchOffLead: string;
 		switchOffBody: string;
+		/** The second source, plainly: what it sends, that Google is not a non-profit, and that it has its own switch. */
+		googleOptIn: string;
 		covers: string;
 		backupsTitle: string;
 		backupsBody: string;

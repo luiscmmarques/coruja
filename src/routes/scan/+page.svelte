@@ -237,7 +237,10 @@
 <!-- The book in hand. One card at a time, and always with a way onward. -->
 {#if flow === 'checking' || flow === 'saving'}
 	<section class="card status" aria-live="polite">
-		<p>{flow === 'saving' ? $t.scan.searchingMetadata : $t.common.loading}</p>
+		<p class="busy">
+			<span class="spinner" aria-hidden="true"></span>
+			{flow === 'saving' ? $t.scan.searchingMetadata : $t.common.loading}
+		</p>
 	</section>
 {:else if flow === 'duplicate' && duplicate}
 	<section class="card status" aria-live="polite">
@@ -384,6 +387,42 @@
 
 	.status {
 		border-color: var(--accent);
+	}
+
+	.busy {
+		display: flex;
+		align-items: center;
+		gap: 0.6rem;
+	}
+
+	/*
+	 * The wait is real: up to two providers, each on its own budget, and Open Library
+	 * requests deliberately paced to its 1-per-second etiquette. The ring says
+	 * "working"; the copy stays the reassurance. The book row is already saved before
+	 * this card ever shows — the spinner is about the name arriving, never about
+	 * whether the book made it onto the shelf.
+	 */
+	.spinner {
+		flex: none;
+		width: 1.25rem;
+		height: 1.25rem;
+		border-radius: 50%;
+		border: 3px solid var(--accent-soft);
+		border-top-color: var(--accent);
+		animation: spin 0.9s linear infinite;
+	}
+
+	@keyframes spin {
+		to {
+			transform: rotate(360deg);
+		}
+	}
+
+	/* Slowed, not frozen: a stopped ring reads as a hang, which is the wrong message. */
+	@media (prefers-reduced-motion: reduce) {
+		.spinner {
+			animation-duration: 2.5s;
+		}
 	}
 
 	form {

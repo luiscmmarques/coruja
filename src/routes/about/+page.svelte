@@ -52,10 +52,21 @@
 	</div>
 </article>
 
+<!-- The same line Setup's footer shows, because a bug report that names its version is answerable — and About is where someone looking for "what am I running" goes first. -->
+<footer>
+	<p class="muted">{$t.setup.aboutVersion(__APP_VERSION__)}</p>
+</footer>
+
 <style>
 	/* Prose wants a shorter measure than the app shell's 40rem. */
 	.prose {
 		max-width: 34rem;
+	}
+
+	footer {
+		margin-top: 1.5rem;
+		text-align: center;
+		font-size: 0.875rem;
 	}
 
 	.card {

@@ -168,6 +168,9 @@ export const it: Messages = {
 			'Quando scansioni un libro, il suo numero viene inviato a un database di libri per recuperare il titolo e la copertina. Quella richiesta è l’unica cosa che esce da questo dispositivo.',
 		lookupOn: 'Cerca i libri per me',
 		lookupOff: 'Disattivata. I dettagli li scrivo io',
+		googleLookup: 'Chiedi anche a Google Books quando Open Library non basta',
+		googleLookupExplain:
+			'Acceso dall’inizio, e sei tu a poterlo spegnere. Quando Open Library non conosce un libro, o lascia dei dettagli vuoti, lo stesso numero viene inviato anche a Google Books per colmare le lacune. La pagina della privacy dice esattamente cosa significa.',
 
 		backupTitle: 'Backup',
 		backupExplain:
@@ -245,6 +248,8 @@ export const it: Messages = {
 		switchOffLead: 'Puoi disattivarla.',
 		switchOffBody:
 			'C’è un interruttore nelle Impostazioni, e con quello spento non parte nessuna richiesta. L’app resta perfettamente utilizzabile: titolo, autore e numero di pagine li scrivi tu, e un libro aggiunto così conta esattamente come tutti gli altri. Fa conquistare anche un badge.',
+		googleOptIn:
+			'Una seconda fonte aiuta con i libri che Open Library conosce poco: Google Books. Quando Open Library non conosce un libro — o lo conosce solo a metà — lo stesso numero viene inviato anche a Google per colmare le lacune. Non lo accompagna nient’altro, ma Google è un’azienda, non un ente senza scopo di lucro, ed è per questo che ha il suo interruttore nelle Impostazioni, separato dal primo.',
 		covers:
 			'Una copertina viene scaricata una volta sola e poi conservata nel database locale, così lo scaffale si disegna anche senza connessione e la stessa copertina non viene mai chiesta due volte. L’immagine stessa arriva dai server dell’Internet Archive, la stessa organizzazione senza scopo di lucro che gestisce Open Library.',
 		backupsTitle: 'I tuoi backup sono tuoi',
@@ -257,7 +262,7 @@ export const it: Messages = {
 		childrenBody:
 			'Questa app è stata scritta perché la usi un bambino. Niente di quello che fa qui dentro viene raccolto, niente viene condiviso all’esterno, non c’è nessun feed, nessun profilo, nessun modo di pubblicare qualcosa e nessun modo per contattarlo attraverso l’app.',
 		trademarks:
-			'Cloudflare è un marchio di Cloudflare, Inc. Open Library e Internet Archive sono marchi di Internet Archive. Nessuno dei due è affiliato a Coruja; sono nominati perché essere precisi su chi vede cosa richiede di nominarli.'
+			'Cloudflare è un marchio di Cloudflare, Inc. Open Library e Internet Archive sono marchi di Internet Archive. Google Books è un marchio di Google LLC. Nessuno di loro è affiliato a Coruja; sono nominati perché essere precisi su chi vede cosa richiede di nominarli.'
 	},
 	support: {
 		title: 'Sostienici',

@@ -29,6 +29,23 @@ import { shouldRetryLookup } from '$lib/domain/retry';
 import { buildExport, parseImport, type BackupFile } from '$lib/domain/transfer';
 import { fetchBookMetadata } from '$lib/lookup';
 
+/**
+ * The Google Books API key, baked in at build time from the environment (see DEPLOY.md for which key lives in which environment). Referrer- or IP-restricted at Google's end, so shipping it in the bundle is by design; an absent variable — a fork, CI, a build that opted out — leaves the empty string, and the provider simply does not exist.
+ */
+const GOOGLE_BOOKS_KEY: string = import.meta.env.VITE_GOOGLE_BOOKS_KEY ?? '';
+
+/** Whether this build can ask Google at all. The Setup toggle only shows when it can. */
+export const googleBooksAvailable = GOOGLE_BOOKS_KEY !== '';
+
+/**
+ * The key, gated by the per-source switch: `googleBooksEnabled` absent means on, the same convention as `lookupEnabled` — the household consented to lookups as such, and PLAN.md records why the second source rides on that consent. The dedicated off switch in Setup is what keeps it a real choice.
+ */
+function googleBooksKeyFor(settings: Settings): string | undefined {
+	return settings.googleBooksEnabled !== false && GOOGLE_BOOKS_KEY !== ''
+		? GOOGLE_BOOKS_KEY
+		: undefined;
+}
+
 /** Settings is a singleton row; Dexie needs a key for it. */
 export interface SettingsRow extends Settings {
 	id: 'singleton';
@@ -411,7 +428,9 @@ export async function enrichBook(bookId: string, isbn13: string): Promise<'done'
 	const settings = await getSettings();
 	if (settings.lookupEnabled === false) return 'done';
 
-	const metadata = navigator.onLine ? await fetchBookMetadata(isbn13) : null;
+	const metadata = navigator.onLine
+		? await fetchBookMetadata(isbn13, { googleBooksKey: googleBooksKeyFor(settings) })
+		: null;
 	if (metadata) {
 		await applyMetadata(bookId, metadata);
 		await db.pendingLookups.delete(isbn13);
@@ -434,7 +453,9 @@ export async function drainPendingLookups(): Promise<void> {
 	for (const pending of await db.pendingLookups.toArray()) {
 		if (!shouldRetryLookup(pending, Date.now())) continue;
 
-		const metadata = await fetchBookMetadata(pending.isbn13);
+		const metadata = await fetchBookMetadata(pending.isbn13, {
+			googleBooksKey: googleBooksKeyFor(settings)
+		});
 		if (metadata) {
 			await applyMetadata(pending.bookId, metadata);
 			await db.pendingLookups.delete(pending.isbn13);

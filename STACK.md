@@ -34,7 +34,8 @@ The technology choices and their reasons. The convention is inherited from Graft
 | --- | --- |
 | **Native `BarcodeDetector` first** | Zero bytes shipped, best battery, on the platform a child's hand-me-down phone most likely runs (Chrome on Android). Feature-checked for `ean_13`, not just presence. |
 | **`zxing-wasm` fallback, lazily imported** | Safari and Firefox have no detector. ~1 MB, fetched only on first scan on those browsers, served from our origin (the package's CDN default would break both the CSP and offline) and precached thereafter. |
-| **Open Library, keyless** | Run by the Internet Archive; mission-aligned with a no-tracking app. Google Books was removed — its keyless quota is literally zero — and returns in v2 as bring-your-own-API-key if at all. |
+| **Open Library, keyless, primary** | Run by the Internet Archive; mission-aligned with a no-tracking app. Used per its API guidelines: requests paced to the published 1/s, covers fetched by OLID to stay off the rate-limited ISBN path, everything cached after one fetch. |
+| **Google Books, keyed gap-filler** | Removed in v1 because its keyless quota is literally zero; returned in v1.1 with a referrer-restricted key baked in at build time (one per environment, DEPLOY.md). Asked only when Open Library falls short; on by default with its own switch in Setup — Google is not a non-profit, and the Privacy page names it plainly. |
 
 ## Quality gates
 

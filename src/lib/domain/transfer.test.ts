@@ -89,6 +89,7 @@ const settings: Required<Settings> = {
 	locale: 'fr',
 	activeReaderId: 'reader-1',
 	lookupEnabled: true,
+	googleBooksEnabled: true,
 	adultPinHash: 'c0ffee00c0ffee00c0ffee00c0ffee00c0ffee00c0ffee00c0ffee00c0ffee00'
 };
 

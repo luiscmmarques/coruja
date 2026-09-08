@@ -170,6 +170,9 @@ export const pt: Messages = {
 			'Quando digitalizas um livro, o número dele é enviado para uma base de dados de livros para ir buscar o título e a capa. Esse pedido é a única coisa que sai deste dispositivo.',
 		lookupOn: 'Procurar os livros por mim',
 		lookupOff: 'Desligada. Escrevo eu os detalhes',
+		googleLookup: 'Perguntar também ao Google Books quando o Open Library não chega',
+		googleLookupExplain:
+			'Ligado à partida, e és tu que o podes desligar. Quando o Open Library não conhece um livro, ou deixa detalhes em branco, o mesmo número é também enviado ao Google Books para preencher as falhas. A página de privacidade diz exatamente o que isso significa.',
 
 		backupTitle: 'Cópia de segurança',
 		backupExplain:
@@ -247,6 +250,8 @@ export const pt: Messages = {
 		switchOffLead: 'Podes desligar a pesquisa.',
 		switchOffBody:
 			'Há um interruptor nas Definições e, com ele desligado, não é feito pedido nenhum. A aplicação continua completamente utilizável: escreves tu o título, o autor e o número de páginas, e um livro acrescentado assim conta exatamente o mesmo que qualquer outro. Até dá uma medalha.',
+		googleOptIn:
+			'Uma segunda fonte ajuda com os livros que o Open Library mal conhece: o Google Books. Quando o Open Library não conhece um livro — ou conhece só a meias — o mesmo número é enviado também à Google para preencher as falhas. Nada mais vai com ele, mas a Google é uma empresa, não uma organização sem fins lucrativos, e é por isso que tem o seu próprio interruptor nas Definições, separado do primeiro.',
 		covers:
 			'Uma capa é buscada uma vez e fica depois guardada na base de dados local, para que a estante continue a desenhar-se sem ligação e a mesma capa nunca seja pedida duas vezes. A própria imagem vem dos servidores do Internet Archive, a mesma organização sem fins lucrativos que gere a Open Library.',
 		backupsTitle: 'As tuas cópias de segurança são tuas',
@@ -259,7 +264,7 @@ export const pt: Messages = {
 		childrenBody:
 			'Isto foi escrito para ser usado por uma criança. Nada do que ela faz aqui é recolhido, nada é partilhado para fora, não há feed, não há perfil, não há maneira de publicar nada nem maneira de alguém a contactar através disto.',
 		trademarks:
-			'Cloudflare é uma marca registada da Cloudflare, Inc. Open Library e Internet Archive são marcas registadas do Internet Archive. Nenhum deles está associado à Coruja; são nomeados porque ser exato sobre quem vê o quê obriga a nomeá-los.'
+			'Cloudflare é uma marca registada da Cloudflare, Inc. Open Library e Internet Archive são marcas registadas do Internet Archive. Google Books é uma marca registada da Google LLC. Nenhum deles está associado à Coruja; são nomeados porque ser exato sobre quem vê o quê obriga a nomeá-los.'
 	},
 	support: {
 		title: 'Apoiar',

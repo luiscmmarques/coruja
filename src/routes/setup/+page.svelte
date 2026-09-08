@@ -13,6 +13,7 @@
 		archiveReader,
 		editReader,
 		exportBackup,
+		googleBooksAvailable,
 		importBackup,
 		readersStore,
 		saveSettings,
@@ -106,6 +107,15 @@
 
 	async function chooseLookup(enabled: boolean) {
 		await saveSettings({ lookupEnabled: enabled });
+	}
+
+	/** Absent means on, like the main switch: the second source has its own off. */
+	const googleEnabled = $derived(settings?.googleBooksEnabled !== false);
+
+	async function chooseGoogle(event: Event) {
+		await saveSettings({
+			googleBooksEnabled: (event.currentTarget as HTMLInputElement).checked
+		});
 	}
 
 	// --- backup ---
@@ -374,6 +384,14 @@
 			{$t.setup.lookupOff}
 		</label>
 	</div>
+	{#if googleBooksAvailable && lookupEnabled}
+		<!-- On by default like the main switch, but its own switch all the same: Open Library is a non-profit and the privacy page leans on that, so the second source can be turned off alone. Hidden entirely in a build without a key — a toggle that does nothing would be dishonest. -->
+		<label class="choice google">
+			<input type="checkbox" name="google-lookup" checked={googleEnabled} onchange={chooseGoogle} />
+			{$t.setup.googleLookup}
+		</label>
+		<p class="muted">{$t.setup.googleLookupExplain}</p>
+	{/if}
 </section>
 
 <section class="card">
@@ -704,6 +722,13 @@
 		height: 1.15rem;
 		flex: none;
 		accent-color: var(--accent);
+	}
+
+	/* The opt-in sits apart from the on/off pair: a different decision, not a third option. */
+	.google {
+		margin-top: 0.5rem;
+		padding-top: 0.5rem;
+		border-top: 1px solid var(--line);
 	}
 
 	.actions {

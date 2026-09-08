@@ -166,6 +166,9 @@ export const fr: Messages = {
 			'Quand tu scannes un livre, son numéro est envoyé à une base de données de livres pour récupérer le titre et la couverture. Cette requête est la seule chose qui quitte cet appareil.',
 		lookupOn: 'Rechercher les livres pour moi',
 		lookupOff: 'Désactivée. Je saisis les détails moi-même',
+		googleLookup: 'Demander aussi à Google Books quand Open Library ne suffit pas',
+		googleLookupExplain:
+			'Activé au départ, et à toi de le désactiver. Quand Open Library ne connaît pas un livre, ou laisse des détails vides, le même numéro est aussi envoyé à Google Books pour combler les manques. La page Confidentialité dit exactement ce que cela veut dire.',
 
 		backupTitle: 'Sauvegarde',
 		backupExplain:
@@ -243,6 +246,8 @@ export const fr: Messages = {
 		switchOffLead: 'Vous pouvez la désactiver.',
 		switchOffBody:
 			'Il y a un interrupteur dans les Réglages, et lorsqu’il est éteint aucune requête n’est faite du tout. L’application reste tout à fait utilisable : vous saisissez vous-même le titre, l’auteur et le nombre de pages, et un livre ajouté ainsi compte exactement comme les autres. Il fait même gagner un badge.',
+		googleOptIn:
+			'Une seconde source aide pour les livres qu’Open Library couvre mal : Google Books. Quand Open Library ne connaît pas un livre — ou ne le connaît qu’à moitié — le même numéro est aussi envoyé à Google pour combler les manques. Rien d’autre ne l’accompagne, mais Google est une entreprise, pas une organisation à but non lucratif, et c’est pourquoi il a son propre interrupteur dans les Réglages, séparé du premier.',
 		covers:
 			'Une couverture est récupérée une fois puis conservée dans la base de données locale, si bien que l’étagère se dessine encore sans connexion et que la même couverture n’est jamais demandée deux fois. L’image elle-même vient des serveurs de l’Internet Archive, la même organisation à but non lucratif qui gère Open Library.',
 		backupsTitle: 'Vos sauvegardes sont à vous',
@@ -255,7 +260,7 @@ export const fr: Messages = {
 		childrenBody:
 			'Ceci a été écrit pour qu’une enfant l’utilise. Rien de ce qu’elle y fait n’est collecté, rien n’est partagé vers l’extérieur, il n’y a pas de fil d’actualité, pas de profil, aucun moyen de publier quoi que ce soit et aucun moyen pour quiconque de la contacter par ce biais.',
 		trademarks:
-			'Cloudflare est une marque de Cloudflare, Inc. Open Library et Internet Archive sont des marques de l’Internet Archive. Ni l’une ni l’autre n’est affiliée à Coruja ; elles sont nommées parce qu’être exact sur qui voit quoi exige de les nommer.'
+			'Cloudflare est une marque de Cloudflare, Inc. Open Library et Internet Archive sont des marques de l’Internet Archive. Google Books est une marque de Google LLC. Aucune d’elles n’est affiliée à Coruja ; elles sont nommées parce qu’être exact sur qui voit quoi exige de les nommer.'
 	},
 	support: {
 		title: 'Soutenir',

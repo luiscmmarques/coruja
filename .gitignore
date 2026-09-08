@@ -6,3 +6,6 @@ __pycache__/
 build
 .svelte-kit
 .private-words
+# API keys for local dev live here (the pre-commit hook refuses them as well).
+.env
+.env.*
