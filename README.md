@@ -6,7 +6,7 @@ A family reading tracker and book inventory that lives in your browser. Scan a b
 
 ## What it does
 
-- **Scan** a book's barcode and the title, author, cover, publisher and language arrive from [Open Library](https://openlibrary.org). No camera, no barcode, no connection? Type it in. A hand-entered book is a first-class book, and one the internet has never heard of earns a badge.
+- **Scan** a book's barcode and the title, author, cover, publisher and language arrive from [Open Library](https://openlibrary.org), with Google Books filling the gaps if you opt in. No camera, no barcode, no connection? Type it in. A hand-entered book is a first-class book, and one the internet has never heard of earns a badge.
 - **The shelf** is the household's book inventory: searchable, filterable by status and language, sortable by recently added, recently read, or title.
 - **Readers** are family profiles on one device. Each has their own ladder and badges; the shelf shows who has which book open.
 - **Everything stays on the device.** The ISBN lookup is the only network request the app makes, it is disclosed in [Privacy](src/routes/privacy/+page.svelte), and it can be switched off. Backup is a JSON file you keep yourself.

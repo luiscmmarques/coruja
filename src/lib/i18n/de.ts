@@ -168,6 +168,9 @@ export const de: Messages = {
 			'Wenn du ein Buch scannst, wird seine Nummer an eine Buchdatenbank geschickt, um Titel und Cover zu holen. Diese Anfrage ist das Einzige, was dieses Gerät je verlässt.',
 		lookupOn: 'Bücher für mich suchen',
 		lookupOff: 'Aus. Ich trage die Details selbst ein',
+		googleLookup: 'Auch Google Books fragen, wenn Open Library nicht weiterweiß',
+		googleLookupExplain:
+			'Aus, solange du es nicht einschaltest. Wenn Open Library ein Buch nicht kennt oder Details offenlässt, wird dieselbe Nummer auch an Google Books geschickt, um die Lücken zu füllen. Die Datenschutzseite sagt genau, was das bedeutet.',
 
 		backupTitle: 'Sicherung',
 		backupExplain:
@@ -245,6 +248,8 @@ export const de: Messages = {
 		switchOffLead: 'Du kannst es abschalten.',
 		switchOffBody:
 			'In den Einstellungen gibt es einen Schalter, und wenn er aus ist, wird überhaupt keine Anfrage gestellt. Die App bleibt vollständig brauchbar: du tippst Titel, Autor und Seitenzahl selbst ein, und ein so hinzugefügtes Buch zählt genau wie jedes andere. Es bringt sogar ein Abzeichen.',
+		googleOptIn:
+			'Es gibt eine zweite Quelle, die du dazuschalten kannst: Google Books. Sie ist aus, solange du sie in den Einstellungen nicht einschaltest. Ist sie an, wird bei einem Buch, das Open Library nicht kennt — oder nur halb —, dieselbe Nummer auch an Google geschickt, um die Lücken zu füllen. Mehr geht nicht mit, aber Google ist ein Unternehmen und keine gemeinnützige Organisation, und genau dieser Unterschied ist der Grund, warum das ein eigener Schalter ist und nicht Teil des ersten.',
 		covers:
 			'Ein Cover wird einmal geholt und dann in der Datenbank hier behalten, damit sich das Regal auch ohne Verbindung zeichnet und dasselbe Cover nie zweimal angefragt wird. Das Bild selbst kommt von den Servern des Internet Archive, derselben gemeinnützigen Organisation, die Open Library betreibt.',
 		backupsTitle: 'Deine Sicherungen gehören dir',
@@ -257,7 +262,7 @@ export const de: Messages = {
 		childrenBody:
 			'Das hier ist dafür geschrieben, dass ein Kind es benutzt. Nichts, was es darin tut, wird gesammelt, nichts wird nach außen geteilt, es gibt keinen Feed, kein Profil, keine Möglichkeit, etwas zu veröffentlichen, und keine Möglichkeit, das Kind darüber zu erreichen.',
 		trademarks:
-			'Cloudflare ist eine Marke von Cloudflare, Inc. Open Library und Internet Archive sind Marken des Internet Archive. Keines von beiden gehört zu Coruja; sie sind genannt, weil man sie nennen muss, um genau zu sagen, wer was sieht.'
+			'Cloudflare ist eine Marke von Cloudflare, Inc. Open Library und Internet Archive sind Marken des Internet Archive. Google Books ist eine Marke von Google LLC. Keines davon gehört zu Coruja; sie sind genannt, weil man sie nennen muss, um genau zu sagen, wer was sieht.'
 	},
 	support: {
 		title: 'Unterstützen',

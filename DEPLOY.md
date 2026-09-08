@@ -36,8 +36,7 @@ gh api -X PUT repos/{owner}/coruja/branches/main/protection \
 
 ### The flow, day to day
 
-`main` is protected and never pushed to directly, including by you. All work rides a
-branch named for what it is, and merges through a pull request once CI is green:
+`main` is protected and never pushed to directly, including by you. All work rides a branch named for what it is, and merges through a pull request once CI is green:
 
 ```sh
 git switch -c feature/reading-goals   # or fix/scanner-torch
@@ -48,12 +47,9 @@ git push -u origin feature/reading-goals
 ```
 
 - `feature/<name>` for new behaviour, `fix/<name>` for repairs. Nothing else.
-- **Squash and merge**, always: main stays a clean line of releases, one commit per
-  feature, and the branch's work-in-progress commits stay on the branch.
-- Every push to the branch redeploys its preview at `<branch>.coruja.pages.dev`;
-  merging to `main` is the production release. Delete the branch after merging.
-- The single birth commit is public history now: never amend or force-push again.
-  Corrections are new commits on a `fix/` branch.
+- **Squash and merge**, always: main stays a clean line of releases, one commit per feature, and the branch's work-in-progress commits stay on the branch.
+- Every push to the branch redeploys its preview at `<branch>.coruja.pages.dev`; merging to `main` is the production release. Delete the branch after merging.
+- The single birth commit is public history now: never amend or force-push again. Corrections are new commits on a `fix/` branch.
 
 No required reviews: a household project with one maintainer would deadlock on itself. The gate is the CI run (`verify` in `.github/workflows/ci.yml`), force pushes and branch deletion are blocked, and the rule binds admins too.
 
@@ -85,12 +81,22 @@ Workers & Pages -> Create -> Pages -> Connect to Git -> the repo.
 | Build output directory | `build`           |
 | Environment variable   | `NODE_VERSION=22` |
 
+### 5. Google Books API key, one variable per environment
+
+The lookup's gap-filling second provider needs `VITE_GOOGLE_BOOKS_KEY` at **build time** (Vite inlines it; it ends up visible in the shipped bundle, which is fine — these keys are restricted at Google's end, and the restriction, not secrecy, is the protection). Three keys exist, one per environment, each valid only where its restriction matches. **Key values are never committed anywhere in this repo** — the pre-commit hook refuses `.env` files, and this table deliberately names the restrictions, not the keys:
+
+| Where the build runs | Where the variable lives | Key restriction (Google Cloud console) |
+| --- | --- | --- |
+| Cloudflare Pages, Production | Pages -> Settings -> Environment variables -> **Production** | HTTP referrer `coruja.app/*` |
+| Cloudflare Pages, Preview (QA) | Pages -> Settings -> Environment variables -> **Preview** | HTTP referrer `*.coruja-5fx.pages.dev/*` |
+| Local dev (`npm run dev`/`preview`) | `.env` in the repo root, gitignored and hook-blocked | IP address of the dev machine |
+| GitHub Actions CI | nowhere — deliberately keyless | n/a |
+
+An absent variable is a supported configuration, not an error: the build succeeds, `googleBooksAvailable` is false, the Setup toggle does not render, and the app is Open-Library-only — which is what CI builds and any fork get. Two dependencies worth knowing when a key mysteriously stops working: the referrer keys ride on `_headers` sending `Referrer-Policy: strict-origin-when-cross-origin` (tightening it to `no-referrer` turns every Google request into a 403), and the dev key dies whenever the ISP re-leases the home IP.
+
 Then Custom domains -> add `coruja.app`, and a Bulk Redirect `www.coruja.app` -> `https://coruja.app` (301). TLS: Full (strict); minimum TLS 1.2.
 
-Caching -> Browser Cache TTL: **Respect Existing Headers**. The `_headers` file is
-the whole caching design: `no-cache` HTML shells so deploys take effect immediately,
-`immutable` hashed assets so nothing is refetched. A global TTL here would override
-both directions and either pin stale shells or re-download immutable files.
+Caching -> Browser Cache TTL: **Respect Existing Headers**. The `_headers` file is the whole caching design: `no-cache` HTML shells so deploys take effect immediately, `immutable` hashed assets so nothing is refetched. A global TTL here would override both directions and either pin stale shells or re-download immutable files.
 
 **Do not enable Cloudflare Web Analytics.** Its beacon is blocked by our CSP by design, and the privacy page promises no analytics. Edge request counts in the dashboard cost nothing and betray nobody.
 
@@ -99,7 +105,7 @@ Bot Fight Mode is fine: `_headers` already sets `no-transform` on HTML, which ke
 ## What already ships in the repo
 
 - `_headers`: immutable caching for hashed assets, `no-cache` + `no-transform` HTML, guarded by `headers.test.ts`.
-- CSP in the built HTML pins `connect-src` to Open Library, its covers host, and the Internet Archive origins the covers redirect to. Nothing else can be reached.
+- CSP in the built HTML pins `connect-src` to Open Library, its covers host, the Internet Archive origins the covers redirect to, and Google Books' JSON and thumbnail origins. Nothing else can be reached.
 - `.github/workflows/ci.yml`: prettier, svelte-check, tests, build — the merge gate.
 
 ## Releases

@@ -229,6 +229,10 @@ export interface Settings {
 	 */
 	lookupEnabled?: boolean;
 	/**
+	 * Whether a lookup may also ask Google Books when Open Library falls short. Off by default and meaningful only when a build carries an API key: Open Library is a non-profit and the privacy page leans on that, so sending the ISBN to Google is a separate, explicit opt-in rather than part of `lookupEnabled`.
+	 */
+	googleBooksEnabled?: boolean;
+	/**
 	 * Salted SHA-256 of the family PIN (see domain/pin.ts). When set, switching the active reader to an adult profile asks for the PIN — the lock that makes hiding adult books mean something, since the switcher is otherwise one tap.
 	 */
 	adultPinHash?: string;

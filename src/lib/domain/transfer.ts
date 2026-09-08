@@ -190,7 +190,8 @@ function isSettingsShape(s: Record<string, unknown>): boolean {
 		(s.locale === undefined || ['en', 'fr', 'de', 'it', 'pt'].includes(s.locale as string)) &&
 		isOptionalString(s.adultPinHash) &&
 		isOptionalString(s.activeReaderId) &&
-		isOptionalBoolean(s.lookupEnabled)
+		isOptionalBoolean(s.lookupEnabled) &&
+		isOptionalBoolean(s.googleBooksEnabled)
 	);
 }
 
