@@ -76,6 +76,13 @@ export const fr: Messages = {
 		editBook: 'Modifier ce livre',
 		adultBook: 'Livre pour adultes, masqué sur les profils des enfants',
 		deleteBook: 'Supprimer ce livre',
+		refreshBook: 'Rechercher ce livre à nouveau',
+		refreshWorking: 'Recherche…',
+		refreshUpdated: 'Ce qui manquait a été complété.',
+		refreshUnchanged: 'Rien à ajouter : tout est déjà là.',
+		refreshUnknown: 'Personne ne connaît encore ce numéro. Ce qui est là reste tel quel.',
+		refreshOffline: 'Pas de connexion pour le moment. Cela se complétera plus tard.',
+		refreshDisabled: 'La recherche de livres est désactivée dans Réglages.',
 		deleteConfirm: (title) =>
 			`Supprimer « ${title} » ? Il quitte l’étagère avec son historique de lecture. Les badges déjà gagnés restent gagnés.`,
 		addedByHand: 'ajouté à la main'
@@ -250,6 +257,8 @@ export const fr: Messages = {
 			'Une seconde source aide pour les livres qu’Open Library couvre mal : Google Books. Quand Open Library ne connaît pas un livre — ou ne le connaît qu’à moitié — le même numéro est aussi envoyé à Google pour combler les manques. Rien d’autre ne l’accompagne, mais Google est une entreprise, pas une organisation à but non lucratif, et c’est pourquoi il a son propre interrupteur dans les Réglages, séparé du premier.',
 		covers:
 			'Une couverture est récupérée une fois puis conservée dans la base de données locale, si bien que l’étagère se dessine encore sans connexion et que la même couverture n’est jamais demandée deux fois. L’image elle-même vient des serveurs de l’Internet Archive, la même organisation à but non lucratif qui gère Open Library.',
+		askAgain:
+			'Un autre moment envoie le numéro, et c’est vous qui le choisissez : le bouton « Rechercher ce livre à nouveau », dans les détails d’un livre, pose la même question aux mêmes catalogues, pour un livre arrivé à moitié vide. Rien d’autre ne part avec lui non plus.',
 		backupsTitle: 'Vos sauvegardes sont à vous',
 		backupsBody:
 			'Enregistrer une copie de votre étagère produit un fichier, et ce fichier va là où vous le mettez. Il n’est pas envoyé et il n’en existe aucune copie ici. C’est l’autre moitié du marché : comme rien n’est sur un serveur, rien ne peut être récupéré depuis un serveur. Si vous effacez les données de ce navigateur, ou si l’étagère vit dans une fenêtre privée que vous fermez, tout disparaît. Le fichier de sauvegarde est la seule chose qui survit à cela, alors faites-en un.',

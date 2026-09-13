@@ -94,6 +94,22 @@ export interface Messages {
 		/** The adult-book checkbox in the edit dialog; visible to adult profiles only. */
 		adultBook: string;
 		deleteBook: string;
+		/**
+		 * Asking the providers again about a book already on the shelf, from the edit dialog. Shown only for a book with an ISBN, since the ISBN is the question.
+		 */
+		refreshBook: string;
+		/** While the request is out. */
+		refreshWorking: string;
+		/** Something was filled in — usually the cover. */
+		refreshUpdated: string;
+		/** The answer was the same as what is already stored. Not a failure. */
+		refreshUnchanged: string;
+		/** Neither provider knows this number. A hand-entered book is a first-class book. */
+		refreshUnknown: string;
+		/** No connection. The queue will pick it up; nothing was lost. */
+		refreshOffline: string;
+		/** Lookups are switched off in Setup, so this button cannot do anything. */
+		refreshDisabled: string;
 		/** Names what goes with it. Honest, and the last chance to keep a finished book. */
 		deleteConfirm: (title: string) => string;
 		/** Badge on a book entered by hand. A boast, not an apology. */
@@ -252,6 +268,8 @@ export interface Messages {
 		/** The second source, plainly: what it sends, that Google is not a non-profit, and that it has its own switch. */
 		googleOptIn: string;
 		covers: string;
+		/** The refresh button is a second, deliberate trigger for the same request — this page names every moment the ISBN leaves the device, so it has to name that one. */
+		askAgain: string;
 		backupsTitle: string;
 		backupsBody: string;
 		hostingTitle: string;

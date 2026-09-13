@@ -66,6 +66,13 @@ export const en: Messages = {
 		editBook: 'Edit this book',
 		adultBook: 'Adult book, hidden from children’s profiles',
 		deleteBook: 'Delete this book',
+		refreshBook: 'Look this book up again',
+		refreshWorking: 'Looking…',
+		refreshUpdated: 'Filled in what was missing.',
+		refreshUnchanged: 'Nothing to add — everything is already here.',
+		refreshUnknown: 'Still nobody knows this number. What is here stays as it is.',
+		refreshOffline: 'No connection right now. It will fill itself in later.',
+		refreshDisabled: 'Book lookup is switched off in Setup.',
 		deleteConfirm: (title) =>
 			`Delete “${title}”? It comes off the shelf along with who read it. Badges already earned stay earned.`,
 		addedByHand: 'added by hand'
@@ -236,6 +243,8 @@ export const en: Messages = {
 			'A second source helps with the books Open Library is thin on: Google Books. When Open Library does not know a book — or knows only half of it — the same number is also sent to Google to fill the gaps. Nothing else goes with it, but Google is a company, not a non-profit, which is why it has its own switch in Setup, separate from the first one.',
 		covers:
 			"A cover is fetched once and then kept in the local database, so the shelf still draws itself with no connection and the same cover is never asked for twice. The image itself comes from the Internet Archive's servers, the same non-profit that runs Open Library.",
+		askAgain:
+			'One other moment sends the number, and you choose it: the “Look this book up again” button in a book’s own details asks the same catalogues the same question, for a book that arrived half empty. Nothing else goes with it either.',
 		backupsTitle: 'Your backups are yours',
 		backupsBody:
 			"Saving a copy of your shelf produces a file, and that file goes wherever you put it. It is not uploaded and there is no copy of it here. That is the other half of the deal: because nothing is on a server, nothing can be recovered from one. If you clear this browser's data, or the shelf lives in a private window that you close, it is gone. The backup file is the only thing that survives that, so make one.",

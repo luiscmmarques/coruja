@@ -81,6 +81,13 @@ export const pt: Messages = {
 		editBook: 'Editar este livro',
 		adultBook: 'Livro para adultos, escondido nos perfis das crianças',
 		deleteBook: 'Eliminar este livro',
+		refreshBook: 'Procurar este livro outra vez',
+		refreshWorking: 'A procurar…',
+		refreshUpdated: 'O que faltava ficou preenchido.',
+		refreshUnchanged: 'Nada a acrescentar: já está tudo aqui.',
+		refreshUnknown: 'Ainda ninguém conhece este número. O que está aqui fica assim.',
+		refreshOffline: 'Sem ligação neste momento. Preenche-se mais tarde.',
+		refreshDisabled: 'A pesquisa de livros está desligada nas Definições.',
 		deleteConfirm: (title) =>
 			`Eliminar «${title}»? Sai da estante e leva com ele quem o leu. As medalhas já ganhas continuam ganhas.`,
 		addedByHand: 'adicionado à mão'
@@ -254,6 +261,8 @@ export const pt: Messages = {
 			'Uma segunda fonte ajuda com os livros que o Open Library mal conhece: o Google Books. Quando o Open Library não conhece um livro — ou conhece só a meias — o mesmo número é enviado também à Google para preencher as falhas. Nada mais vai com ele, mas a Google é uma empresa, não uma organização sem fins lucrativos, e é por isso que tem o seu próprio interruptor nas Definições, separado do primeiro.',
 		covers:
 			'Uma capa é buscada uma vez e fica depois guardada na base de dados local, para que a estante continue a desenhar-se sem ligação e a mesma capa nunca seja pedida duas vezes. A própria imagem vem dos servidores do Internet Archive, a mesma organização sem fins lucrativos que gere a Open Library.',
+		askAgain:
+			'Há outro momento em que o número sai, e és tu que o escolhes: o botão «Procurar este livro outra vez», nos detalhes de um livro, faz a mesma pergunta aos mesmos catálogos, para um livro que chegou meio vazio. Também aí não vai mais nada com ele.',
 		backupsTitle: 'As tuas cópias de segurança são tuas',
 		backupsBody:
 			'Guardar uma cópia da tua estante produz um ficheiro, e esse ficheiro vai para onde tu o puseres. Não é enviado para nenhum sítio e não fica aqui cópia nenhuma dele. É a outra metade do acordo: como nada está num servidor, também nada pode ser recuperado de um. Se limpares os dados deste navegador, ou se a estante viver numa janela privada que depois fechas, desaparece. O ficheiro da cópia de segurança é a única coisa que sobrevive a isso, por isso faz um.',

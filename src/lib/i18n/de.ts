@@ -77,6 +77,13 @@ export const de: Messages = {
 		editBook: 'Dieses Buch bearbeiten',
 		adultBook: 'Buch für Erwachsene, in Kinderprofilen ausgeblendet',
 		deleteBook: 'Dieses Buch löschen',
+		refreshBook: 'Dieses Buch neu suchen',
+		refreshWorking: 'Suche…',
+		refreshUpdated: 'Was fehlte, ist ergänzt.',
+		refreshUnchanged: 'Nichts zu ergänzen – alles ist schon da.',
+		refreshUnknown: 'Diese Nummer kennt noch niemand. Was da ist, bleibt so.',
+		refreshOffline: 'Gerade keine Verbindung. Es ergänzt sich später von selbst.',
+		refreshDisabled: 'Die Buchsuche ist in den Einstellungen ausgeschaltet.',
 		deleteConfirm: (title) =>
 			`„${title}“ löschen? Es verschwindet aus dem Regal, samt seiner Lesegeschichte. Abzeichen, die du schon hast, bleiben dir.`,
 		addedByHand: 'von Hand eingetragen'
@@ -252,6 +259,8 @@ export const de: Messages = {
 			'Eine zweite Quelle hilft bei den Büchern, die Open Library kaum kennt: Google Books. Wenn Open Library ein Buch nicht kennt — oder nur halb —, wird dieselbe Nummer auch an Google geschickt, um die Lücken zu füllen. Mehr geht nicht mit, aber Google ist ein Unternehmen und keine gemeinnützige Organisation, und deshalb hat es in den Einstellungen einen eigenen Schalter, getrennt vom ersten.',
 		covers:
 			'Ein Cover wird einmal geholt und dann in der Datenbank hier behalten, damit sich das Regal auch ohne Verbindung zeichnet und dasselbe Cover nie zweimal angefragt wird. Das Bild selbst kommt von den Servern des Internet Archive, derselben gemeinnützigen Organisation, die Open Library betreibt.',
+		askAgain:
+			'Ein weiterer Moment schickt die Nummer, und du wählst ihn selbst: der Knopf „Dieses Buch neu suchen“ in den Details eines Buches stellt denselben Katalogen dieselbe Frage, für ein Buch, das halb leer angekommen ist. Auch dabei geht nichts anderes mit.',
 		backupsTitle: 'Deine Sicherungen gehören dir',
 		backupsBody:
 			'Wenn du eine Kopie deines Regals speicherst, entsteht eine Datei, und die geht dorthin, wo du sie hinlegst. Sie wird nicht hochgeladen, und hier liegt keine Kopie davon. Das ist die andere Hälfte der Abmachung: weil nichts auf einem Server liegt, kann von einem Server auch nichts zurückgeholt werden. Wenn du die Daten dieses Browsers löschst, oder wenn das Regal in einem privaten Fenster liegt, das du schließt, ist es weg. Die Sicherungsdatei ist das Einzige, was das übersteht, also mach eine.',

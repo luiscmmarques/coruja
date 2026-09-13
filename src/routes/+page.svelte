@@ -11,8 +11,10 @@
 		earnedBadgesStore,
 		editBook,
 		finishReading,
+		getBook,
 		readersStore,
 		readingsStore,
+		refreshBook,
 		settingsStore,
 		recordPastRead,
 		startReading,
@@ -229,6 +231,7 @@
 
 	function openEdit(book: Book) {
 		editing = book;
+		refreshNote = null;
 		editTitle = book.title;
 		editAuthors = book.authors.join(', ');
 		editPublisher = book.publisher ?? '';
@@ -270,6 +273,47 @@
 			...(activeReader?.adult === true ? { adult: editAdult || undefined } : {})
 		});
 		editing = null;
+	}
+
+	/*
+	 * Asking the providers again about a book already on the shelf. Lives in the advanced
+	 * drawer because it is a repair, not a daily action: the everyday case is that the
+	 * scan filled the book in already.
+	 *
+	 * The result is a sentence next to the button rather than a toast: the dialog is
+	 * already open, the person is looking at it, and a message that fades away is a
+	 * message a parent holding a toddler will miss. It clears when the dialog closes.
+	 */
+	let refreshing = $state(false);
+	let refreshNote = $state<string | null>(null);
+
+	async function refresh() {
+		if (!editing || refreshing) return;
+		refreshing = true;
+		refreshNote = null;
+		const outcome = await refreshBook(editing.id);
+		refreshNote = {
+			updated: $t.shelf.refreshUpdated,
+			unchanged: $t.shelf.refreshUnchanged,
+			unknown: $t.shelf.refreshUnknown,
+			offline: $t.shelf.refreshOffline,
+			disabled: $t.shelf.refreshDisabled
+		}[outcome];
+		// Re-read so the dialog's fields show what the lookup wrote, rather than the
+		// stale copy `openEdit` snapshotted — the live store updates the card behind
+		// the dialog, but these inputs are plain state by design.
+		const fresh = await getBook(editing.id);
+		if (fresh) {
+			editing = fresh;
+			if (!fresh.editedByHand) {
+				editTitle = fresh.title;
+				editAuthors = fresh.authors.join(', ');
+				editPublisher = fresh.publisher ?? '';
+				editPages = fresh.pageCount ? String(fresh.pageCount) : '';
+				editLanguage = fresh.language ?? '';
+			}
+		}
+		refreshing = false;
 	}
 
 	async function removeBook() {
@@ -631,6 +675,13 @@
 						{/if}
 						{#if editing.isbn13}
 							<p class="muted isbn">{$t.scan.isbnLabel}: {editing.isbn13}</p>
+							<!-- The ISBN is the question, so the button only exists where there is one. -->
+							<button type="button" class="outline refresh" onclick={refresh} disabled={refreshing}>
+								{refreshing ? $t.shelf.refreshWorking : $t.shelf.refreshBook}
+							</button>
+							<!-- Always in the DOM, hidden while empty: a live region added to the page
+							     at the same moment as its text is not announced at all. -->
+							<p class="muted refresh-note" aria-live="polite">{refreshNote ?? ''}</p>
 						{/if}
 						<button type="button" class="quiet delete" onclick={removeBook}>
 							{$t.shelf.deleteBook}
@@ -953,6 +1004,15 @@
 
 	.advanced .delete {
 		justify-self: start;
+	}
+
+	.advanced .refresh {
+		justify-self: start;
+	}
+
+	/* No text yet, no gap in the layout: the grid gap would otherwise leave a hole. */
+	.refresh-note:empty {
+		display: none;
 	}
 
 	.read-before {

@@ -107,7 +107,7 @@ Bot Fight Mode is fine: `_headers` already sets `no-transform` on HTML, which ke
 ## What already ships in the repo
 
 - `_headers`: immutable caching for hashed assets, `no-cache` + `no-transform` HTML, guarded by `headers.test.ts`.
-- CSP in the built HTML pins `connect-src` to Open Library, its covers host, the Internet Archive origins the covers redirect to, and Google Books' JSON and thumbnail origins. Nothing else can be reached.
+- CSP in the built HTML pins `connect-src` to Open Library, its covers host, the Internet Archive origins the covers redirect to, and Google Books' JSON origin. Nothing else can be reached — `books.google.com` is not on the list, because its cover bytes are unreadable from a browser anyway (see `fromGoogleBooks` in `src/lib/lookup.ts`).
 - `.github/workflows/ci.yml`: prettier, svelte-check, tests, build — the merge gate.
 
 ## Releases

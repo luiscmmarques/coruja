@@ -142,9 +142,11 @@ export interface Collection {
 }
 
 /**
- * The collection picker's palette: twenty feelings a book can leave you with, not
- * twenty things a book can be about. The readers' picker owns the animals; keeping
+ * The collection picker's palette: twenty-four feelings a book can leave you with, not
+ * twenty-four things a book can be about. The readers' picker owns the animals; keeping
  * the two vocabularies apart means a shelf never confuses "who" with "how it felt".
+ *
+ * Every entry is a feeling a child would claim proudly, which is why 🥱 and 😠 are not here: a palette that can label a book boring is a palette for grading books, and this one is for remembering them.
  */
 export const COLLECTION_EMOJI = [
 	'😂', // laughed out loud
@@ -166,7 +168,11 @@ export const COLLECTION_EMOJI = [
 	'🥸', // secrets and spies
 	'🥳', // celebration
 	'🤭', // giggles
-	'😌' // comfort reread
+	'😌', // comfort reread
+	'😋', // made me hungry
+	'🤢', // gloriously gross
+	'😤', // gave me courage
+	'🤪' // completely bonkers
 ] as const;
 
 export interface Reading {
