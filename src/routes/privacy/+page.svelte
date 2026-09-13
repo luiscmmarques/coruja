@@ -29,6 +29,7 @@
 		<p>{$t.privacy.exception2}</p>
 		<p><strong>{$t.privacy.switchOffLead}</strong> {$t.privacy.switchOffBody}</p>
 		<p>{$t.privacy.googleOptIn}</p>
+		<p>{$t.privacy.askAgain}</p>
 		<p class="muted">{$t.privacy.covers}</p>
 	</div>
 

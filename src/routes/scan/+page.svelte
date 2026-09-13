@@ -10,10 +10,10 @@
 	 *
 	 * `camera` is about the device: starting, live, or unavailable. `flow` is about the book in hand: idle, checking, duplicate, saving, done. Keeping them apart is what lets the manual forms work identically whether or not there is a camera, and what makes "pause scanning" a single condition — `flow` leaving `idle`.
 	 *
-	 * The stream is deliberately *not* torn down while a book is being handled: a family cataloguing a pile scans, confirms, scans again, and re-acquiring the camera between each book costs a second and a flicker. `onCode` is gated instead. The stream is stopped on unmount, unconditionally — a live track keeps the camera indicator lit even after the element is gone, which reads to a parent as an app watching the room.
+	 * **The stream lives exactly as long as the search for a book.** The moment an ISBN is accepted — scanned or typed — the tracks are stopped and the viewfinder leaves the screen; tapping *Scan* on the confirmation card acquires the camera again. This reverses an earlier decision to keep the stream alive across a pile of books (gating `onCode` instead) and pays a second of re-acquisition per book for it. The reason is what the alternative looks like from the room: a camera indicator that stays lit while a parent reads a confirmation card, and a preview quietly filming the kitchen while nobody is pointing it at anything. A phone held by a child should have its camera on only while it is being used, and "found it" is the natural moment to let go. The stream is also stopped on unmount, unconditionally, for the same reason.
 	 */
 
-	import { onMount } from 'svelte';
+	import { onMount, tick } from 'svelte';
 	import { addBook, enrichBook, findBookByIsbn, getBook } from '$lib/db';
 	import { normalizeIsbn } from '$lib/domain/isbn';
 	import type { Book, BookSource } from '$lib/domain/types';
@@ -60,33 +60,46 @@
 	let pagesInput = $state('');
 	let languageInput = $state('');
 
-	const showVideo = $derived(camera !== 'unavailable');
+	/**
+	 * The viewfinder is on screen only while a book is being looked for, so the element holding the stream disappears with it. `openCamera` therefore waits a tick for it to exist again — see `resume`. Two conditions, not one, because "hidden" and "impossible" must not share a branch: the "no camera here" card keys on `camera` alone.
+	 */
+	const showVideo = $derived(camera !== 'unavailable' && flow === 'idle');
 	const showIsbnForm = $derived(isbnOpen || camera === 'unavailable');
 
-	onMount(() => {
-		// Captured as a const: narrowing on a `let` does not survive into the closure below, and the element cannot change while this instance is mounted.
+	/** The live stream, or null when there is none. Not `$state`: nothing renders from it, `camera` and `flow` say everything the markup needs. */
+	let handle: ScannerHandle | null = null;
+	let gone = false;
+
+	/** Acquire the camera, unless one is already acquired or this instance is on its way out. Re-entrant on purpose: `resume` and `onMount` both call it. */
+	async function openCamera(): Promise<void> {
+		if (handle || gone || camera === 'unavailable') return;
+		// One tick for the viewfinder to be back in the DOM: `bind:this` is null while it is hidden, and `resume` calls this in the same breath as it unhides it.
+		await tick();
 		const video = videoEl;
 		if (!video) return;
+		camera = 'starting';
+		const started = await startScanner(video, onCode, onError);
+		// The permission prompt, or a scan finishing, may have outlived the request.
+		if (gone || flow !== 'idle') {
+			started.stop();
+			return;
+		}
+		handle = started;
+		// `onError` may already have moved us on; only `starting` is ours to leave.
+		if (camera === 'starting') camera = 'live';
+	}
 
-		let cancelled = false;
-		let handle: ScannerHandle | null = null;
+	/** Let the camera go. Idempotent, and safe to call when there was never one. */
+	function closeCamera(): void {
+		handle?.stop();
+		handle = null;
+	}
 
-		void (async () => {
-			const started = await startScanner(video, onCode, onError);
-			// The permission prompt may have outlived the component.
-			if (cancelled) {
-				started.stop();
-				return;
-			}
-			handle = started;
-			// `onError` may already have moved us on; only `starting` is ours to leave.
-			if (camera === 'starting') camera = 'live';
-		})();
-
+	onMount(() => {
+		void openCamera();
 		return () => {
-			cancelled = true;
-			handle?.stop();
-			handle = null;
+			gone = true;
+			closeCamera();
 		};
 	});
 
@@ -109,6 +122,8 @@
 	/** Duplicate check, then add. The single door every ISBN goes through. */
 	async function accept(isbn13: string, source: BookSource): Promise<void> {
 		flow = 'checking';
+		// Found: the camera has done its job and has no business staying on while a card is read. Also stops a second frame arriving mid-check, which `onCode`'s `flow` gate used to be the only thing preventing.
+		closeCamera();
 		heldIsbn = isbn13;
 		duplicate = null;
 
@@ -150,13 +165,14 @@
 		}
 	}
 
-	/** Back to looking. A pile of books is one session, not one scan. */
+	/** Back to looking. A pile of books is one session, not one scan — so this is also where the camera comes back. */
 	function resume(): void {
 		flow = 'idle';
 		duplicate = null;
 		heldIsbn = null;
 		savedTitle = '';
 		savedQueued = false;
+		void openCamera();
 	}
 
 	async function submitIsbn(event: SubmitEvent): Promise<void> {
@@ -191,6 +207,8 @@
 			});
 			savedTitle = book.title;
 			savedQueued = false;
+			// Nothing was scanned, but the state is the same one: a card is on screen and the camera has nothing to look at until *Scan* is tapped.
+			closeCamera();
 			flow = 'done';
 			titleInput = '';
 			authorInput = '';
@@ -228,7 +246,8 @@
 			{$t.scan.manualEntry}
 		</button>
 	</section>
-{:else}
+{:else if camera === 'unavailable'}
+	<!-- Only when the device really cannot scan. The viewfinder is also gone while a card is on screen, and saying "no camera found" there would be a lie about the phone. -->
 	<section class="card">
 		<p>{$t.scan.cameraUnavailable}</p>
 	</section>

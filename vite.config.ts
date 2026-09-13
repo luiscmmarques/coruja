@@ -97,7 +97,7 @@ export default defineConfig({
 			/*
 			 * The CSP is generated here rather than hand-written in static/_headers, because SvelteKit's prerendered pages carry an inline bootstrap script whose content changes every build — only generated hashes can allow it. Emitted into a <meta> tag per page, which also means the policy is enforced under `vite preview` and therefore testable locally.
 			 *
-			 * `connect-src` lists the two lookup providers: the ISBN lookup is the only network request this app makes, and the policy is the enforcement of that claim — anything else attempting to phone home is blocked by the browser. Open Library is primary; Google Books (returned in v1.1 with a referrer-restricted key, off by default in Setup) is the gap-filler, and its two origins are the JSON endpoint and the cover thumbnails.
+			 * `connect-src` lists the two lookup providers: the ISBN lookup is the only network request this app makes, and the policy is the enforcement of that claim — anything else attempting to phone home is blocked by the browser. Open Library is primary; Google Books (returned in v1.1 with a referrer-restricted key, off by default in Setup) is the gap-filler, and its one origin is the JSON endpoint — covers come from the Internet Archive alone.
 			 */
 			csp: {
 				mode: 'hash',
@@ -115,8 +115,10 @@ export default defineConfig({
 					 * connect-src too, so without these two entries every cover download dies
 					 * at the first hop. Same non-profit; the privacy page says so.
 					 *
-					 * Google's thumbnails serve directly from books.google.com with no
-					 * redirect (verified live), so no wildcard sibling is needed there.
+					 * books.google.com is deliberately absent: its thumbnails answer with no
+					 * `Access-Control-Allow-Origin` at all, so a fetch can never read them
+					 * whatever the policy says (see `fromGoogleBooks`). Allowing the origin
+					 * would only hide, from this file, a request that cannot succeed.
 					 */
 					'connect-src': [
 						'self',
@@ -124,8 +126,7 @@ export default defineConfig({
 						'https://covers.openlibrary.org',
 						'https://archive.org',
 						'https://*.archive.org',
-						'https://www.googleapis.com',
-						'https://books.google.com'
+						'https://www.googleapis.com'
 					],
 					'style-src': ['self', 'unsafe-inline'],
 					'img-src': ['self', 'data:', 'blob:'],

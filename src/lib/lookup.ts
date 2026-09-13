@@ -158,13 +158,11 @@ function openLibraryCoverUrl(isbn13: string, olKey?: string): string {
 /**
  * Origins a cover may be fetched from — the same list `connect-src` pins in vite.config.ts, minus the JSON endpoints.
  *
- * Needed because Open Library's `cover.medium` does not always point at its own cover service: it has been observed returning `https://archive.org/download/…` URLs, which the CSP rightly blocks — a console violation on every such book, and no cover. Any off-list URL is swapped for the constructed Open Library one, which serves the same image when it exists. books.google.com is here for the Google Books thumbnails, which serve directly with no redirect (verified live).
+ * Needed because Open Library's `cover.medium` does not always point at its own cover service: it has been observed returning `https://archive.org/download/…` URLs, which the CSP rightly blocks — a console violation on every such book, and no cover. Any off-list URL is swapped for the constructed Open Library one, which serves the same image when it exists.
+ *
+ * Every entry is an Internet Archive origin, and that is now the whole list: the cover paragraph of `fromGoogleBooks` says why Google's thumbnails left it.
  */
-const COVER_ORIGINS = [
-	'https://covers.openlibrary.org',
-	'https://archive.org',
-	'https://books.google.com'
-];
+const COVER_ORIGINS = ['https://covers.openlibrary.org', 'https://archive.org'];
 
 function safeCoverUrl(url: string | undefined, isbn13: string, olKey?: string): string {
 	if (url && COVER_ORIGINS.some((origin) => url.startsWith(origin + '/'))) return url;
@@ -285,12 +283,14 @@ function dropEmptyAuthors(metadata: BookMetadata): BookMetadata {
  * Google's original removal (keyless quota answered `Queries per day: 0`, so every fallback call was a guaranteed 429) is fixed by the key, not forgotten: the key is baked in at build time and is *referrer-restricted*, so shipping it in the bundle is by design — the restriction is the protection, not secrecy. No key at build time simply means this provider does not exist. The restriction also means the lookup depends on `Referrer-Policy: strict-origin-when-cross-origin` in static/_headers: tighten that to `no-referrer` and every Google request answers 403.
  *
  * One request answers everything, including the language as a plain ISO tag — no MARC table. The `q=isbn:` query can return several loosely related volumes (verified live: two items for one ISBN), so the volume is chosen by its own ISBN-13 identifier, falling back to the first item only when none carries it, because some records list only an `OTHER` identifier.
+ *
+ * **No cover comes from here, and v1.1 was wrong to take one.** `books.google.com/books/content?…` serves the JPEG with *no* `Access-Control-Allow-Origin` header and answers a preflight with 405 (both verified live), so a browser `fetch()` can never read those bytes — the app stores covers as blobs, and there are no blobs to store. It was not the CSP, the key or the referrer policy. The image element would render it, but `img-src` is `self data: blob:` precisely so that no third party learns which books the family owns from a page view, and widening that to Google would trade a real privacy property for a 128×185 px thumbnail. Worse, the request is sent even though the response is unreadable: keeping the URL means Google is told the ISBN *and* handed a second, futile request per book — eight of them, once a failed cover is retried. So the URL is not produced at all, `imageLinks` is not even requested, and the privacy page's promise that cover images come from the Internet Archive stays literally true. The day the Cloudflare Worker proxy of TODO.md fetches covers server-side, the proxy owns the response headers and this becomes a one-line reinstatement: put `imageLinks` back in the projection, map `thumbnail` (with `zoom=0`, which returns a larger image — verified) through the proxy origin, and restore the merge exception below. Until then, the fallbacks for a coverless book are Open Library and the camera.
  */
 /**
  * Partial-response projection (Google's `fields` parameter): exactly the fields the mapping below reads, nothing else. The full volume record is ~3 KB of description, sale info and access flags per item; this trims the transfer to a fraction and is Google's own recommended etiquette for read-heavy clients.
  */
 const GOOGLE_FIELDS =
-	'items(volumeInfo(title,authors,publisher,publishedDate,pageCount,language,industryIdentifiers,imageLinks))';
+	'items(volumeInfo(title,authors,publisher,publishedDate,pageCount,language,industryIdentifiers))';
 
 export async function fromGoogleBooks(
 	isbn13: string,
@@ -312,8 +312,7 @@ export async function fromGoogleBooks(
 		publisher: asText(info.publisher),
 		pageCount: asCount(info.pageCount),
 		publishedYear: yearFrom(info.publishedDate),
-		language: googleLanguage(info.language),
-		coverUrl: googleCoverUrl(info.imageLinks)
+		language: googleLanguage(info.language)
 	});
 	return isUseful(metadata) ? dropEmptyAuthors(metadata) : null;
 }
@@ -333,18 +332,6 @@ function googleLanguage(value: unknown): string | undefined {
 	return base && /^[a-z]{2,3}$/.test(base) ? base : undefined;
 }
 
-/**
- * Thumbnail URLs arrive as `http://books.google.com/…` (verified live), upgraded to https and accepted only on that exact origin: `connect-src` pins it, and a URL anywhere else would log a CSP violation on every such book.
- */
-function googleCoverUrl(imageLinks: unknown): string | undefined {
-	const links = asRecord(imageLinks);
-	const url = (asText(links.thumbnail) ?? asText(links.smallThumbnail))?.replace(
-		/^http:\/\//,
-		'https://'
-	);
-	return url?.startsWith('https://books.google.com/') ? url : undefined;
-}
-
 /* ------------------------------------------------------------------------ the entry point */
 
 /** What a caller may tune. Everything is optional; the defaults are production. */
@@ -360,22 +347,12 @@ export interface LookupOptions {
 }
 
 /**
- * Fields Google may fill when Open Library leaves them empty. `title` is absent on purpose — no title means no record at all (`isUseful`). The cover is handled apart: Open Library always *constructs* a URL for a book it knows, and a construction is a guess, not a cover — see `isConstructedCover`.
+ * Fields Google may fill when Open Library leaves them empty. `title` is absent on purpose — no title means no record at all (`isUseful`). `coverUrl` is absent because Google has no cover this app can read (see `fromGoogleBooks`): a missing image is not a gap Google can close, so it is not a reason to spend a request there. v1.1 counted a *constructed* cover URL — the guess Open Library's cover service 404s for exactly the books it has no image of — as a gap worth asking Google about; that only made sense while a Google thumbnail could win the merge.
  */
 const GAP_FIELDS = ['authors', 'publisher', 'pageCount', 'language', 'publishedYear'] as const;
 
-/**
- * True when the URL is one this module built as a guess rather than one the provider attested. Only the constructed forms carry `?default=false` — put there precisely so a miss is a 404 — which makes the marker reliable. The distinction matters in the merge: a guess 404s exactly for the books Open Library has no image of, which are the books Google was asked about (a QA scan surfaced this: record found, cover guessed, guess 404ed, real Google thumbnail ignored).
- */
-function isConstructedCover(url: string | undefined): boolean {
-	return url !== undefined && url.endsWith('?default=false');
-}
-
 function hasGaps(metadata: BookMetadata): boolean {
-	return (
-		GAP_FIELDS.some((field) => metadata[field] === undefined) ||
-		isConstructedCover(metadata.coverUrl)
-	);
+	return GAP_FIELDS.some((field) => metadata[field] === undefined);
 }
 
 /**
@@ -397,9 +374,6 @@ export async function fetchBookMetadata(
 	const filler = await fromGoogleBooks(isbn13, googleBooksKey, fetchFn);
 	if (!primary) return filler;
 	if (!filler) return primary;
-	// Spread order is the precedence: Google underneath, Open Library on top. Both sides are compacted, so an absent field cannot shadow a real value with `undefined`.
-	const merged = { ...filler, ...primary };
-	// One exception to Open-Library-wins: a cover Google attested beats a URL we merely guessed, because the guess 404s for exactly the books that reached this branch.
-	if (filler.coverUrl && isConstructedCover(primary.coverUrl)) merged.coverUrl = filler.coverUrl;
-	return merged;
+	// Spread order is the precedence: Google underneath, Open Library on top. Both sides are compacted, so an absent field cannot shadow a real value with `undefined`. There is no exception for covers any more, because Google no longer offers one — `fromGoogleBooks` says why.
+	return { ...filler, ...primary };
 }

@@ -79,6 +79,13 @@ export const it: Messages = {
 		editBook: 'Modifica questo libro',
 		adultBook: 'Libro per adulti, nascosto nei profili dei bambini',
 		deleteBook: 'Elimina questo libro',
+		refreshBook: 'Cerca di nuovo questo libro',
+		refreshWorking: 'Ricerca…',
+		refreshUpdated: 'Quello che mancava è stato completato.',
+		refreshUnchanged: 'Niente da aggiungere: c’è già tutto.',
+		refreshUnknown: 'Questo numero non lo conosce ancora nessuno. Quello che c’è resta così.',
+		refreshOffline: 'Nessuna connessione adesso. Si completerà più tardi.',
+		refreshDisabled: 'La ricerca dei libri è disattivata nelle Impostazioni.',
 		deleteConfirm: (title) =>
 			`Eliminare «${title}»? Esce dallo scaffale insieme a chi lo ha letto. I badge già conquistati restano tuoi.`,
 		addedByHand: 'aggiunto a mano'
@@ -252,6 +259,8 @@ export const it: Messages = {
 			'Una seconda fonte aiuta con i libri che Open Library conosce poco: Google Books. Quando Open Library non conosce un libro — o lo conosce solo a metà — lo stesso numero viene inviato anche a Google per colmare le lacune. Non lo accompagna nient’altro, ma Google è un’azienda, non un ente senza scopo di lucro, ed è per questo che ha il suo interruttore nelle Impostazioni, separato dal primo.',
 		covers:
 			'Una copertina viene scaricata una volta sola e poi conservata nel database locale, così lo scaffale si disegna anche senza connessione e la stessa copertina non viene mai chiesta due volte. L’immagine stessa arriva dai server dell’Internet Archive, la stessa organizzazione senza scopo di lucro che gestisce Open Library.',
+		askAgain:
+			'C’è un altro momento in cui il numero parte, e lo scegli tu: il pulsante «Cerca di nuovo questo libro», nei dettagli di un libro, fa la stessa domanda agli stessi cataloghi, per un libro arrivato mezzo vuoto. Nemmeno lì parte nient’altro.',
 		backupsTitle: 'I tuoi backup sono tuoi',
 		backupsBody:
 			'Quando salvi una copia del tuo scaffale ottieni un file, e quel file va dove lo metti tu. Non viene caricato da nessuna parte e qui non ne resta nessuna copia. Questa è l’altra metà del patto: se niente sta su un server, niente si può recuperare da un server. Se cancelli i dati di questo browser, o se lo scaffale vive in una finestra privata che poi chiudi, è finita. Il file di backup è l’unica cosa che sopravvive a tutto questo, quindi creane uno.',

@@ -287,12 +287,18 @@ test('Google maps the volume that claims the ISBN, not the first item', async ()
 		publisher: 'HarperCollins',
 		pageCount: 366,
 		publishedYear: 2003,
-		language: 'en',
-		// The thumbnail arrives on http:// and is upgraded; connect-src only knows https.
-		coverUrl: 'https://books.google.com/books/content?id=abc&printsec=frontcover&img=1&zoom=1'
+		language: 'en'
 	});
 	// The partial-response projection rides on every request: the full record is ~3 KB of description and sale info per item that nothing here reads.
 	assert.ok(calls[0].includes('fields='));
+});
+
+test('no cover is taken from Google, however inviting the thumbnail in the answer looks', async () => {
+	// books.google.com serves cover bytes with no `Access-Control-Allow-Origin`, so a fetch can never read them, and the fixture's `imageLinks` is there to prove the mapping ignores what it cannot use. See the cover paragraph of `fromGoogleBooks`.
+	const { fetchFn, calls } = stubFetch([[GOOGLE_VOLUMES, () => json(googleVolumes)]]);
+	assert.equal((await fromGoogleBooks(ISBN, GOOGLE_KEY, fetchFn))?.coverUrl, undefined);
+	// And the field is not even asked for: an unreadable image is not worth the bytes.
+	assert.ok(!calls[0].includes('imageLinks'));
 });
 
 test('when no volume claims the ISBN, the first item is better than nothing', async () => {
@@ -333,22 +339,6 @@ test('a regional language tag is reduced to its base, and a junk tag is dropped'
 	};
 	const dropped = stubFetch([[GOOGLE_VOLUMES, () => json(junk)]]);
 	assert.equal((await fromGoogleBooks(ISBN, GOOGLE_KEY, dropped.fetchFn))?.language, undefined);
-});
-
-test('a cover URL on a foreign origin is dropped, not stored for the CSP to block', async () => {
-	const foreign = {
-		items: [
-			{
-				volumeInfo: {
-					title: 'The Hobbit',
-					industryIdentifiers: [{ type: 'ISBN_13', identifier: ISBN }],
-					imageLinks: { thumbnail: 'http://example.com/cover.jpg' }
-				}
-			}
-		]
-	};
-	const { fetchFn } = stubFetch([[GOOGLE_VOLUMES, () => json(foreign)]]);
-	assert.equal((await fromGoogleBooks(ISBN, GOOGLE_KEY, fetchFn))?.coverUrl, undefined);
 });
 
 test('an empty Google answer is null', async () => {
@@ -406,11 +396,12 @@ test('Google fills the gaps Open Library left, and Open Library wins where both 
 	assert.deepEqual(calls.map(label), ['ol-data', 'ol-edition-key', 'google']);
 });
 
-test('a guessed cover is a gap: Google is asked, and its attested thumbnail wins', async () => {
-	// A record complete in every field Google could fill — except Open Library offered
-	// no cover, so the URL below is our constructed OLID guess. That guess 404s for
-	// exactly such books (QA found one: record known, image absent), so a thumbnail
-	// Google attests to is the better answer, and the one exception to OL-wins.
+test('a missing cover is not a gap Google can close, so no request is spent there', async () => {
+	// A record complete in every field Google could fill, except Open Library offered no
+	// cover — so the URL below is this module's constructed OLID guess, which 404s for
+	// exactly such books (QA found one: record known, image absent). v1.1 called that a
+	// gap and asked Google for its thumbnail; those bytes turned out to be unreadable
+	// from a browser, so the guess now stands on its own and Google is left alone.
 	const coverless = {
 		[`ISBN:${ISBN}`]: {
 			title: 'The Hobbit (OL)',
@@ -431,15 +422,14 @@ test('a guessed cover is a gap: Google is asked, and its attested thumbnail wins
 		googleBooksKey: GOOGLE_KEY,
 		pace: instantly
 	});
-	// Every text field is still Open Library's…
 	assert.equal(metadata?.title, 'The Hobbit (OL)');
 	assert.equal(metadata?.publisher, 'Houghton Mifflin');
-	// …the constructed-cover gap alone was reason to ask Google, and its cover won.
+	// The guess is kept as the cover URL. `?default=false` is what makes it safe to keep: a book with no image answers 404, which the cover fetch reads as a final answer rather than a failure worth retrying (see covers.ts).
 	assert.equal(
 		metadata?.coverUrl,
-		'https://books.google.com/books/content?id=abc&printsec=frontcover&img=1&zoom=1'
+		'https://covers.openlibrary.org/b/olid/OL26331930M-M.jpg?default=false'
 	);
-	assert.deepEqual(calls.map(label), ['ol-data', 'ol-edition-key', 'google']);
+	assert.deepEqual(calls.map(label), ['ol-data', 'ol-edition-key']);
 });
 
 test('a book Open Library does not know comes entirely from Google', async () => {

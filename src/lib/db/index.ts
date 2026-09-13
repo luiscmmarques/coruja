@@ -28,6 +28,7 @@ import { newlyEarnedBadges, type BadgeId } from '$lib/domain/badges';
 import { shouldRetryLookup } from '$lib/domain/retry';
 import { buildExport, parseImport, type BackupFile } from '$lib/domain/transfer';
 import { fetchBookMetadata } from '$lib/lookup';
+import { fetchCoverImage } from '$lib/covers';
 
 /**
  * The Google Books API key, baked in at build time from the environment (see DEPLOY.md for which key lives in which environment). Referrer- or IP-restricted at Google's end, so shipping it in the bundle is by design; an absent variable — a fork, CI, a build that opted out — leaves the empty string, and the provider simply does not exist.
@@ -379,11 +380,24 @@ export async function settleBadges(
 // Enrichment: apply lookup results, fetch covers, drain the offline queue
 
 /**
+ * What applying metadata left behind. Only the cover needs reporting: the fields either wrote or were blocked by `editedByHand`, and neither outcome is worth another request, while a cover that failed for a reason that may pass is the one thing the queue should keep waiting for.
+ */
+export interface AppliedMetadata {
+	/** Whether any field or cover actually changed. Drives the refresh button's copy. */
+	changed: boolean;
+	/** The cover is still missing **and** it is worth asking again. See covers.ts. */
+	coverPending: boolean;
+}
+
+/**
  * Apply provider metadata to a book — unless a human got there first. `editedByHand` wins over any API for every text field, always. The cover is the one exception: it is not something a person typed, so a hand-edited book with no cover still gets one.
  */
-export async function applyMetadata(bookId: string, metadata: BookMetadata): Promise<void> {
+export async function applyMetadata(
+	bookId: string,
+	metadata: BookMetadata
+): Promise<AppliedMetadata> {
 	const book = await db.books.get(bookId);
-	if (!book) return;
+	if (!book) return { changed: false, coverPending: false };
 
 	const patch: Partial<Book> = {};
 
@@ -398,27 +412,22 @@ export async function applyMetadata(bookId: string, metadata: BookMetadata): Pro
 		if (metadata.publishedYear) patch.publishedYear = metadata.publishedYear;
 	}
 
+	let coverPending = false;
 	if (metadata.coverUrl && !book.coverId) {
-		const coverId = await fetchCover(metadata.coverUrl);
-		if (coverId) patch.coverId = coverId;
+		const cover = await fetchCoverImage(metadata.coverUrl);
+		if (cover.outcome === 'image') {
+			const id = uid();
+			await db.covers.add({ id, blob: cover.blob });
+			patch.coverId = id;
+		} else {
+			// `gone` is the provider's answer and is final; `failed` is worth one more try.
+			coverPending = cover.outcome === 'failed';
+		}
 	}
 
-	if (Object.keys(patch).length > 0) await db.books.update(bookId, patch);
-}
-
-/** Fetch a cover to a blob so the shelf renders offline. Null on any failure. */
-async function fetchCover(url: string): Promise<string | null> {
-	try {
-		const response = await fetch(url, { signal: AbortSignal.timeout(15_000) });
-		if (!response.ok) return null;
-		const blob = await response.blob();
-		if (blob.size === 0 || !blob.type.startsWith('image/')) return null;
-		const id = uid();
-		await db.covers.add({ id, blob });
-		return id;
-	} catch {
-		return null;
-	}
+	const changed = Object.keys(patch).length > 0;
+	if (changed) await db.books.update(bookId, patch);
+	return { changed, coverPending };
 }
 
 /**
@@ -432,8 +441,12 @@ export async function enrichBook(bookId: string, isbn13: string): Promise<'done'
 		? await fetchBookMetadata(isbn13, { googleBooksKey: googleBooksKeyFor(settings) })
 		: null;
 	if (metadata) {
-		await applyMetadata(bookId, metadata);
-		await db.pendingLookups.delete(isbn13);
+		const applied = await applyMetadata(bookId, metadata);
+		await settleQueue(isbn13, bookId, applied);
+		// 'done' even when a cover is still owed: the book has its title and its author,
+		// which is what the scan screen is reporting on. The lingering queue entry is
+		// housekeeping, and telling a family their book is "still being looked up"
+		// because a JPEG timed out would be a worry about nothing.
 		return 'done';
 	}
 
@@ -442,11 +455,80 @@ export async function enrichBook(bookId: string, isbn13: string): Promise<'done'
 }
 
 /**
+ * What the queue should hold after a successful lookup.
+ *
+ * A cover that failed for a reason that may pass — offline, a timeout, a cross-origin refusal — keeps its entry, so the next drain looks the book up again and tries the image once more, bounded by the same eight-attempt backoff as everything else. Repeating the metadata request to reach the cover URL is the price of not storing that URL in a table that is part of the backup format; eight requests spread over a day is a price worth paying for a shelf that has its pictures. Any other outcome settles the entry, including a provider that answered "no cover for this edition", because asking again would spend a request to be told the same thing.
+ *
+ * The bug this exists to prevent: the entry used to be deleted whenever metadata was useful, so a cover that failed once was never fetched again by any code path except restoring a backup. Every Google Books cover fails (see covers.ts), which is how the shelf ended up with permanent gaps.
+ */
+async function settleQueue(
+	isbn13: string,
+	bookId: string,
+	applied: AppliedMetadata
+): Promise<void> {
+	if (!applied.coverPending) {
+		await db.pendingLookups.delete(isbn13);
+		return;
+	}
+	const existing = await db.pendingLookups.get(isbn13);
+	await db.pendingLookups.put({
+		isbn13,
+		bookId,
+		queuedAt: existing?.queuedAt ?? now(),
+		attempts: (existing?.attempts ?? 0) + 1,
+		lastTriedAt: now()
+	});
+}
+
+/**
+ * Ask the providers again about a book already on the shelf — the escape hatch for the
+ * book whose cover never arrived, or whose record the provider has since filled in.
+ *
+ * Deliberately by ISBN through the ordinary `fetchBookMetadata`, so a refresh is exactly the lookup a scan does: same provider order, same merge, same gap-filling, no second code path to keep honest. An ISBN names one edition at both providers, so this cannot land on a different one.
+ *
+ * `editedByHand` still wins, which is the point rather than a limitation: a parent who corrected a title is not asking for it back. On such a book a refresh fetches the cover and nothing else — and the cover is the thing that is usually missing.
+ */
+export type RefreshOutcome = 'updated' | 'unchanged' | 'unknown' | 'offline' | 'disabled';
+
+export async function refreshBook(bookId: string): Promise<RefreshOutcome> {
+	const book = await db.books.get(bookId);
+	if (!book?.isbn13) return 'unknown';
+
+	const settings = await getSettings();
+	if (settings.lookupEnabled === false) return 'disabled';
+	if (!navigator.onLine) return 'offline';
+
+	const metadata = await fetchBookMetadata(book.isbn13, {
+		googleBooksKey: googleBooksKeyFor(settings)
+	});
+	if (!metadata) return 'unknown';
+
+	const applied = await applyMetadata(bookId, metadata);
+	await settleQueue(book.isbn13, bookId, applied);
+	return applied.changed ? 'updated' : 'unchanged';
+}
+
+/**
+ * The drain in progress, or null. Module-level because there is one queue and one device.
+ */
+let draining: Promise<void> | null = null;
+
+/**
  * Drain the queue. Called on app start and when connectivity returns.
  *
- * Each entry is gated by the backoff policy in domain/retry.ts — without it, a book neither provider knows was retried on every app start forever, and Google answered the repetition with 429s that rate-limited the whole device.
+ * **Single-flight.** A second call while a drain is running joins that one instead of starting another. Without this, a flapping mobile connection fires `online` repeatedly and each event started its own pass over the same rows: every entry requested twice or more, and both passes writing `attempts + 1` computed from the same stale value — so the backoff undercounted exactly when the network was worst, which is the situation it exists for. The cost is that entries the running pass already skipped on backoff are not revisited until the next call, which is the right trade: nothing is lost, only deferred.
  */
-export async function drainPendingLookups(): Promise<void> {
+export function drainPendingLookups(): Promise<void> {
+	draining ??= runDrain().finally(() => {
+		draining = null;
+	});
+	return draining;
+}
+
+/**
+ * One pass over the queue. Each entry is gated by the backoff policy in domain/retry.ts — without it, a book neither provider knows was retried on every app start forever, and Google answered the repetition with 429s that rate-limited the whole device.
+ */
+async function runDrain(): Promise<void> {
 	const settings = await getSettings();
 	if (settings.lookupEnabled === false) return;
 
@@ -457,8 +539,8 @@ export async function drainPendingLookups(): Promise<void> {
 			googleBooksKey: googleBooksKeyFor(settings)
 		});
 		if (metadata) {
-			await applyMetadata(pending.bookId, metadata);
-			await db.pendingLookups.delete(pending.isbn13);
+			const applied = await applyMetadata(pending.bookId, metadata);
+			await settleQueue(pending.isbn13, pending.bookId, applied);
 		} else {
 			await db.pendingLookups.update(pending.isbn13, {
 				attempts: pending.attempts + 1,
